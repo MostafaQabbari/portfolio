@@ -78,9 +78,9 @@
   .split-34{display:grid;grid-template-columns:.34fr .66fr;gap:48px}
   .exp-row{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:34px 0}
   .feat-card{display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
-  .col-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .col-2-1px{display:grid;grid-template-columns:1fr 1fr;gap:1px}
-  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
+  .col-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .col-2-1px{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px}
   .stack-row{display:grid;grid-template-columns:200px 1fr;gap:20px}
 
   /* ── NAV ── */
@@ -137,12 +137,14 @@
     .s-work{padding:90px 0 0}
     .s-project{padding:90px 0 0}
     .hero-grid{gap:36px}
-    .col-2{grid-template-columns:1fr}
-    .col-2-1px{grid-template-columns:1fr}
-    .skills-grid{grid-template-columns:1fr}
     .exp-row{grid-template-columns:1fr;gap:6px;padding:22px 0}
     .stack-row{grid-template-columns:1fr;gap:2px}
     .footer-inner{flex-direction:column;align-items:flex-start;gap:14px}
+  }
+
+  /* ── nav mobile padding ── */
+  @media(max-width:767px){
+    nav{padding:14px 20px!important}
   }
 
   /* ── very small (≤400px) ── */
@@ -150,6 +152,9 @@
     .wrap{padding:0 16px}
     .wrap-sm{padding:0 16px}
   }
+
+  /* ── marquee strip ── */
+  .marquee-strip{overflow-x:hidden;overflow-y:visible}
 </style>
 </helmet>
 
@@ -246,7 +251,7 @@
     </section>
 
     <!-- MARQUEE -->
-    <div style="border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:18px 0">
+    <div class="marquee-strip" style="border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:18px 0">
       <div style="display:flex;width:max-content;animation:marquee 26s linear infinite;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--tx3);letter-spacing:.04em">
         <span style="display:flex;gap:34px;padding-right:34px">{{ tickerA }}</span>
         <span style="display:flex;gap:34px;padding-right:34px" aria-hidden="true">{{ tickerA }}</span>
