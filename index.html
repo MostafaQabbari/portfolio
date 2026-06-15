@@ -92,16 +92,14 @@
   .hamburger.open .ham:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
   /* ── MOBILE NAV ── */
-  .mob-nav{display:none;position:fixed;top:var(--nav-h);left:0;right:0;z-index:48;
+  .mob-nav{position:fixed;top:var(--nav-h);left:0;right:0;z-index:48;
     flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);
     padding:8px 20px 20px}
-  .mob-nav.open{display:flex}
   .mob-nav a,.mob-nav button{display:block;width:100%;text-align:left;padding:13px 4px;
     font-size:16px;color:var(--tx2);border:none;border-bottom:1px solid var(--line);
     background:none;cursor:pointer;font-family:'Space Grotesk',system-ui,sans-serif;letter-spacing:0}
   .mob-nav a:last-child,.mob-nav button:last-child{border-bottom:none}
-  .mob-overlay{display:none;position:fixed;inset:0;z-index:47}
-  .mob-overlay.open{display:block}
+  .mob-overlay{position:fixed;inset:0;z-index:47}
 
   /* ── FOOTER ── */
   .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
@@ -161,7 +159,7 @@
 <div style="font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh">
 
   <!-- ════ CLICK-AWAY OVERLAY (closes mobile menu) ════ -->
-  <div class="mob-overlay {{ menuClass }}" onClick="{{ toggleMenu }}"></div>
+  <div class="mob-overlay" style="display:{{ overlayDisplay }}" onClick="{{ toggleMenu }}"></div>
 
   <!-- ════ NAV ════ -->
   <nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;backdrop-filter:saturate(140%) blur(14px);background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--line)">
@@ -176,13 +174,13 @@
       <a class="lnk-u" onClick="{{ goAbout }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">About</a>
       <a class="lnk-u" onClick="{{ goSkills }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">Stack</a>
       <a class="lnk-u" onClick="{{ goContact }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">Contact</a>
-      <button onClick="{{ toggleTheme }}" title="Toggle theme" style="display:flex;align-items:center;gap:8px;cursor:pointer;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--tx2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase">
+      <button type="button" onClick="{{ toggleTheme }}" title="Toggle theme" style="display:flex;align-items:center;gap:8px;cursor:pointer;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--tx2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase">
         <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);display:inline-block"></span>{{ themeLabel }}
       </button>
     </div>
 
     <!-- hamburger (mobile/tablet) -->
-    <button class="hamburger {{ menuClass }}" onClick="{{ toggleMenu }}" aria-label="Toggle menu">
+    <button type="button" class="hamburger {{ menuClass }}" onClick="{{ toggleMenu }}" aria-label="Toggle menu">
       <span class="ham"></span>
       <span class="ham"></span>
       <span class="ham"></span>
@@ -190,12 +188,12 @@
   </nav>
 
   <!-- mobile nav drawer -->
-  <div class="mob-nav {{ menuClass }}">
+  <div class="mob-nav" style="display:{{ menuDisplay }}">
     <a onClick="{{ goWork }}">Work</a>
     <a onClick="{{ goAbout }}">About</a>
     <a onClick="{{ goSkills }}">Stack</a>
     <a onClick="{{ goContact }}">Contact</a>
-    <button onClick="{{ toggleTheme }}" style="display:flex;align-items:center;gap:8px;margin-top:4px;padding:13px 4px">
+    <button type="button" onClick="{{ toggleTheme }}" style="display:flex;align-items:center;gap:8px;margin-top:4px;padding:13px 4px">
       <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);display:inline-block;flex-shrink:0"></span>
       Switch to {{ themeLabel }} mode
     </button>
@@ -649,6 +647,8 @@ class Component extends DCLogic {
       toggleTheme: ()=> this.setState(s=>({theme: s.theme==='dark'?'light':'dark', menuOpen:false})),
       toggleMenu: ()=> this.setState(s=>({ menuOpen: !s.menuOpen })),
       menuClass: menuOpen ? 'open' : '',
+      menuDisplay: menuOpen ? 'flex' : 'none',
+      overlayDisplay: menuOpen ? 'block' : 'none',
       goHome: ()=> this.setState({page:'home', menuOpen:false}),
       goWork: ()=> this.setState({page:'work', menuOpen:false}),
       goProject: ()=> this.setState({page:'project', menuOpen:false}),
