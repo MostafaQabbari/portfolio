@@ -8,53 +8,165 @@
 <body>
 <x-dc>
 <helmet>
+<title>Mostafa Saad — Full-stack Developer</title>
+<meta name="description" content="Full-stack developer based in Leipzig, DE. Node.js, Python, Java microservices.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* ── tokens ── */
   :root{
-    --bg:#0a0a0b; --bg2:#101012; --bg3:#161618;
-    --line:rgba(255,255,255,0.09); --line2:rgba(255,255,255,0.16);
-    --tx:#f4f4f3; --tx2:#a3a3a0; --tx3:#6b6b69;
-    --acc:#4ade80; --acc2:#22c55e; --accdim:rgba(74,222,128,0.13);
-    --shadow:0 24px 60px -24px rgba(0,0,0,0.7);
-    --grid:rgba(255,255,255,0.035);
+    --bg:#0a0a0b;--bg2:#101012;--bg3:#161618;
+    --line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);
+    --tx:#f4f4f3;--tx2:#a3a3a0;--tx3:#6b6b69;
+    --acc:#4ade80;--acc2:#22c55e;--accdim:rgba(74,222,128,.13);
+    --shadow:0 24px 60px -24px rgba(0,0,0,.7);
+    --grid:rgba(255,255,255,.035);
+    --nav-h:65px;
   }
   [data-theme="light"]{
-    --bg:#f6f6f3; --bg2:#ffffff; --bg3:#f0f0ec;
-    --line:rgba(15,15,15,0.10); --line2:rgba(15,15,15,0.18);
-    --tx:#101011; --tx2:#55554f; --tx3:#8a8a83;
-    --acc:#15803d; --acc2:#16a34a; --accdim:rgba(21,128,61,0.10);
-    --shadow:0 24px 60px -28px rgba(20,30,20,0.22);
-    --grid:rgba(15,15,15,0.04);
+    --bg:#f6f6f3;--bg2:#ffffff;--bg3:#f0f0ec;
+    --line:rgba(15,15,15,.10);--line2:rgba(15,15,15,.18);
+    --tx:#101011;--tx2:#55554f;--tx3:#8a8a83;
+    --acc:#15803d;--acc2:#16a34a;--accdim:rgba(21,128,61,.10);
+    --shadow:0 24px 60px -28px rgba(20,30,20,.22);
+    --grid:rgba(15,15,15,.04);
   }
+
+  /* ── reset / base ── */
   *{box-sizing:border-box}
+  html,body{margin:0;overflow-x:hidden}
   html{scroll-behavior:smooth}
-  body{margin:0;background:#0a0a0b;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{background:#0a0a0b;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   ::selection{background:var(--acc);color:#06120a}
   a{color:inherit;text-decoration:none}
-  @keyframes revealUp{from{transform:translateY(26px)}to{transform:none}}
-  [data-reveal]{transform:translateY(26px)}
-  [data-reveal][data-show]{transform:none;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+  img,video,pre{max-width:100%}
+
+  /* ── animations ── */
   @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--accdim)}50%{opacity:.65;box-shadow:0 0 0 6px transparent}}
   @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
   @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* ── underline link ── */
   .lnk-u{position:relative}
   .lnk-u::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:0;background:var(--acc);transition:width .35s cubic-bezier(.16,1,.3,1)}
   .lnk-u:hover::after{width:100%}
+
+  /* ── reveal ── */
+  [data-reveal]{transform:translateY(26px)}
+  [data-reveal][data-show]{transform:none;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+
+  /* ════════════════════════════
+     LAYOUT CLASSES
+  ════════════════════════════ */
+
+  /* containers */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .wrap-sm{max-width:980px;margin:0 auto;padding:0 32px}
+
+  /* section pads */
+  .s-hero{padding:188px 0 110px}
+  .s-pad{padding:120px 0}
+  .s-pad-b{padding:0 0 120px}
+  .s-work{padding:148px 0 0}
+  .s-project{padding:128px 0 0}
+
+  /* grids */
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
+  .split-40{display:grid;grid-template-columns:.4fr .6fr;gap:56px}
+  .split-34{display:grid;grid-template-columns:.34fr .66fr;gap:48px}
+  .exp-row{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:34px 0}
+  .feat-card{display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
+  .col-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .col-2-1px{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
+  .stack-row{display:grid;grid-template-columns:200px 1fr;gap:20px}
+
+  /* ── NAV ── */
+  .nav-inner{display:flex;align-items:center;gap:30px}
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;background:none;border:none;padding:6px;margin-right:-6px}
+  .ham{display:block;width:22px;height:2px;background:var(--tx2);border-radius:2px;transition:transform .3s,opacity .3s}
+  .hamburger.open .ham:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .hamburger.open .ham:nth-child(2){opacity:0;transform:scaleX(0)}
+  .hamburger.open .ham:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* ── MOBILE NAV ── */
+  .mob-nav{display:none;position:fixed;top:var(--nav-h);left:0;right:0;z-index:48;
+    flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);
+    padding:8px 20px 20px}
+  .mob-nav.open{display:flex}
+  .mob-nav a,.mob-nav button{display:block;width:100%;text-align:left;padding:13px 4px;
+    font-size:16px;color:var(--tx2);border:none;border-bottom:1px solid var(--line);
+    background:none;cursor:pointer;font-family:'Space Grotesk',system-ui,sans-serif;letter-spacing:0}
+  .mob-nav a:last-child,.mob-nav button:last-child{border-bottom:none}
+  .mob-overlay{display:none;position:fixed;inset:0;z-index:47}
+  .mob-overlay.open{display:block}
+
+  /* ── FOOTER ── */
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
+
+  /* ════════════════════════════
+     BREAKPOINTS
+  ════════════════════════════ */
+
+  /* ── tablet + mobile: collapse nav ── */
+  @media(max-width:1023px){
+    .nav-inner{display:none}
+    .hamburger{display:flex}
+  }
+
+  /* ── tablet (768–1023): collapse hero & featured cards ── */
+  @media(max-width:1023px){
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .code-card-wrap{display:none}
+    .feat-card{grid-template-columns:1fr}
+    .feat-visual{display:none}
+    .split-40{grid-template-columns:1fr;gap:32px}
+    .split-34{grid-template-columns:1fr;gap:28px}
+  }
+
+  /* ── mobile (≤767px): tighten everything ── */
+  @media(max-width:767px){
+    :root{--nav-h:57px}
+    .wrap{padding:0 20px}
+    .wrap-sm{padding:0 20px}
+    .s-hero{padding:96px 0 56px}
+    .s-pad{padding:64px 0}
+    .s-pad-b{padding:0 0 64px}
+    .s-work{padding:90px 0 0}
+    .s-project{padding:90px 0 0}
+    .hero-grid{gap:36px}
+    .col-2{grid-template-columns:1fr}
+    .col-2-1px{grid-template-columns:1fr}
+    .skills-grid{grid-template-columns:1fr}
+    .exp-row{grid-template-columns:1fr;gap:6px;padding:22px 0}
+    .stack-row{grid-template-columns:1fr;gap:2px}
+    .footer-inner{flex-direction:column;align-items:flex-start;gap:14px}
+  }
+
+  /* ── very small (≤400px) ── */
+  @media(max-width:400px){
+    .wrap{padding:0 16px}
+    .wrap-sm{padding:0 16px}
+  }
 </style>
 </helmet>
 
-<div style="font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden">
+<div style="font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh">
 
-  <!-- ============ NAV ============ -->
+  <!-- ════ CLICK-AWAY OVERLAY (closes mobile menu) ════ -->
+  <div class="mob-overlay {{ menuClass }}" onClick="{{ toggleMenu }}"></div>
+
+  <!-- ════ NAV ════ -->
   <nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;backdrop-filter:saturate(140%) blur(14px);background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--line)">
     <a onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;cursor:pointer">
       <span style="display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line2);border-radius:8px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;color:var(--acc)">MS</span>
       <span style="font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.02em">mostafa<span style="color:var(--tx3)">.</span>saad</span>
     </a>
-    <div style="display:flex;align-items:center;gap:30px">
+
+    <!-- desktop links -->
+    <div class="nav-inner">
       <a class="lnk-u" onClick="{{ goWork }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">Work</a>
       <a class="lnk-u" onClick="{{ goAbout }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">About</a>
       <a class="lnk-u" onClick="{{ goSkills }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">Stack</a>
@@ -63,40 +175,62 @@
         <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);display:inline-block"></span>{{ themeLabel }}
       </button>
     </div>
+
+    <!-- hamburger (mobile/tablet) -->
+    <button class="hamburger {{ menuClass }}" onClick="{{ toggleMenu }}" aria-label="Toggle menu">
+      <span class="ham"></span>
+      <span class="ham"></span>
+      <span class="ham"></span>
+    </button>
   </nav>
 
-  <!-- ============ HOME ============ -->
+  <!-- mobile nav drawer -->
+  <div class="mob-nav {{ menuClass }}">
+    <a onClick="{{ goWork }}">Work</a>
+    <a onClick="{{ goAbout }}">About</a>
+    <a onClick="{{ goSkills }}">Stack</a>
+    <a onClick="{{ goContact }}">Contact</a>
+    <button onClick="{{ toggleTheme }}" style="display:flex;align-items:center;gap:8px;margin-top:4px;padding:13px 4px">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);display:inline-block;flex-shrink:0"></span>
+      Switch to {{ themeLabel }} mode
+    </button>
+  </div>
+
+  <!-- ════ HOME ════ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
   <main data-screen-label="Home">
 
     <!-- HERO -->
-    <section style="position:relative;padding:188px 0 110px;background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:30px 30px">
-      <div style="max-width:1180px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center">
-        <div>
-          <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--bg2);border-radius:999px;padding:7px 14px;margin-bottom:30px">
-            <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);animation:pulse 2.4s infinite"></span>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx2);letter-spacing:.03em">Available for work — Leipzig, DE</span>
-          </div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:18px">// Full-stack developer</div>
-          <h1 style="margin:0;font-size:clamp(46px,6.4vw,86px);line-height:0.98;font-weight:600;letter-spacing:-0.03em">Mostafa<br>Saad<span style="color:var(--acc)">.</span></h1>
-          <p style="max-width:480px;margin:28px 0 0;font-size:19px;line-height:1.6;color:var(--tx2)">I build production-grade backends and polyglot microservices — <span style="color:var(--tx)">Node, Python, Java</span>, and everything that ties them together.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:38px">
-            <a onClick="{{ goWork }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:9px;background:var(--acc);color:#06120a;font-weight:600;font-size:15px;padding:14px 24px;border-radius:11px;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-2px);box-shadow:0 14px 30px -10px var(--accdim)">View work <span style="font-family:'JetBrains Mono',monospace">→</span></a>
-            <a onClick="{{ goContact }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line2);color:var(--tx);font-weight:500;font-size:15px;padding:14px 24px;border-radius:11px;transition:background .25s" style-hover="background:var(--bg2)">Get in touch</a>
-            <a href="https://github.com/MostafaQabbari" target="_blank" style="display:inline-flex;align-items:center;gap:9px;color:var(--tx2);font-size:15px;padding:14px 8px;transition:color .25s" style-hover="color:var(--tx)">GitHub ↗</a>
-          </div>
-        </div>
+    <section class="s-hero" style="position:relative;background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:30px 30px">
+      <div class="wrap">
+        <div class="hero-grid">
 
-        <!-- code card -->
-        <div data-reveal style="animation:floaty 7s ease-in-out infinite">
-          <div style="background:var(--bg2);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden">
-            <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line)">
-              <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span>
-              <span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span>
-              <span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-              <span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">profile.ts</span>
+          <!-- left: text -->
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--bg2);border-radius:999px;padding:7px 14px;margin-bottom:30px">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);animation:pulse 2.4s infinite;flex-shrink:0"></span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx2);letter-spacing:.03em">Available for work — Leipzig, DE</span>
             </div>
-            <pre style="margin:0;padding:22px 20px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.85;color:var(--tx2);overflow:auto"><span style="color:var(--tx3)">const</span> <span style="color:var(--acc)">mostafa</span> = {
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:18px">// Full-stack developer</div>
+            <h1 style="margin:0;font-size:clamp(42px,6.4vw,86px);line-height:0.98;font-weight:600;letter-spacing:-0.03em">Mostafa<br>Saad<span style="color:var(--acc)">.</span></h1>
+            <p style="max-width:480px;margin:24px 0 0;font-size:clamp(16px,2vw,19px);line-height:1.6;color:var(--tx2)">I build production-grade backends and polyglot microservices — <span style="color:var(--tx)">Node, Python, Java</span>, and everything that ties them together.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:34px">
+              <a onClick="{{ goWork }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:9px;background:var(--acc);color:#06120a;font-weight:600;font-size:15px;padding:13px 22px;border-radius:11px;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-2px);box-shadow:0 14px 30px -10px var(--accdim)">View work <span style="font-family:'JetBrains Mono',monospace">→</span></a>
+              <a onClick="{{ goContact }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line2);color:var(--tx);font-weight:500;font-size:15px;padding:13px 22px;border-radius:11px;transition:background .25s" style-hover="background:var(--bg2)">Get in touch</a>
+              <a href="https://github.com/MostafaQabbari" target="_blank" style="display:inline-flex;align-items:center;gap:9px;color:var(--tx2);font-size:15px;padding:13px 8px;transition:color .25s" style-hover="color:var(--tx)">GitHub ↗</a>
+            </div>
+          </div>
+
+          <!-- right: code card (hidden on ≤1023px) -->
+          <div class="code-card-wrap" style="animation:floaty 7s ease-in-out infinite">
+            <div style="background:var(--bg2);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden">
+              <div style="display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line)">
+                <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
+                <span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">profile.ts</span>
+              </div>
+              <pre style="margin:0;padding:22px 20px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.85;color:var(--tx2);overflow:auto"><span style="color:var(--tx3)">const</span> <span style="color:var(--acc)">mostafa</span> = {
   role: <span style="color:var(--tx)">"Full-stack Developer"</span>,
   focus: <span style="color:var(--tx)">"Back-end · APIs"</span>,
   stack: [<span style="color:var(--tx)">"Node"</span>,<span style="color:var(--tx)">"Python"</span>,<span style="color:var(--tx)">"Java"</span>,<span style="color:var(--tx)">"React"</span>],
@@ -104,7 +238,9 @@
   base:  <span style="color:var(--tx)">"Leipzig, Germany"</span>,
   status:<span style="color:var(--acc)">"available"</span> <span style="opacity:.6;animation:blink 1.1s step-end infinite">▍</span>
 };</pre>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -118,48 +254,50 @@
     </div>
 
     <!-- ABOUT -->
-    <section id="about" style="padding:120px 0">
-      <div style="max-width:1180px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:.4fr .6fr;gap:56px">
-        <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)">// About</div>
-        <div data-reveal>
-          <h2 style="margin:0 0 26px;font-size:clamp(28px,3.4vw,42px);line-height:1.12;font-weight:600;letter-spacing:-0.02em;text-wrap:balance">Back-end focused, full-stack capable — I care about systems that don't fall over.</h2>
-          <p style="margin:0 0 18px;font-size:18px;line-height:1.7;color:var(--tx2)">I'm a developer with a deep grounding in <span style="color:var(--tx)">Node.js, Express and MongoDB</span>, and a habit of reaching for the right tool per layer. Lately that's meant orchestrating Python, Java and TypeScript services behind a single product.</p>
-          <p style="margin:0;font-size:18px;line-height:1.7;color:var(--tx2)">A quick learner with a strong work ethic — I like turning fuzzy requirements into clean APIs, sensible data models, and infrastructure that ships. Currently based in Leipzig and open to roles across the EU.</p>
+    <section id="about" class="s-pad">
+      <div class="wrap">
+        <div class="split-40">
+          <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)">// About</div>
+          <div data-reveal>
+            <h2 style="margin:0 0 26px;font-size:clamp(24px,3.4vw,42px);line-height:1.12;font-weight:600;letter-spacing:-0.02em;text-wrap:balance">Back-end focused, full-stack capable — I care about systems that don't fall over.</h2>
+            <p style="margin:0 0 18px;font-size:clamp(16px,2vw,18px);line-height:1.7;color:var(--tx2)">I'm a developer with a deep grounding in <span style="color:var(--tx)">Node.js, Express and MongoDB</span>, and a habit of reaching for the right tool per layer. Lately that's meant orchestrating Python, Java and TypeScript services behind a single product.</p>
+            <p style="margin:0;font-size:clamp(16px,2vw,18px);line-height:1.7;color:var(--tx2)">A quick learner with a strong work ethic — I like turning fuzzy requirements into clean APIs, sensible data models, and infrastructure that ships. Currently based in Leipzig and open to roles across the EU.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
-    <section style="padding:0 0 120px">
-      <div style="max-width:1180px;margin:0 auto;padding:0 32px">
+    <section class="s-pad-b">
+      <div class="wrap">
         <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:46px">// Experience</div>
 
-        <div data-reveal style="display:grid;grid-template-columns:200px 1fr;gap:32px;padding:34px 0;border-top:1px solid var(--line)">
+        <div data-reveal class="exp-row" style="border-top:1px solid var(--line)">
           <div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--acc)">2023 — Present</div>
             <div style="font-size:13px;color:var(--tx3);margin-top:6px">Alexandria · Remote</div>
           </div>
           <div>
-            <h3 style="margin:0;font-size:24px;font-weight:600">Back-end Developer <span style="color:var(--tx3);font-weight:400">· GeekyAir</span></h3>
-            <ul style="margin:18px 0 0;padding:0;list-style:none;display:grid;gap:11px">
-              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:16px;line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Built and maintained back-end services in Node.js &amp; Express; designed MongoDB schemas.</li>
-              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:16px;line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Integrated Google APIs &amp; OAuth — Drive, Calendar, and service-account PDF automation.</li>
-              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:16px;line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Shipped payments (PayPal), transactional email (Nodemailer) and SMS (Twilio).</li>
-              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:16px;line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Built auth/security layers — access &amp; refresh tokens with bcrypt and crypto.</li>
+            <h3 style="margin:0;font-size:clamp(18px,2.2vw,24px);font-weight:600">Back-end Developer <span style="color:var(--tx3);font-weight:400">· GeekyAir</span></h3>
+            <ul style="margin:16px 0 0;padding:0;list-style:none;display:grid;gap:11px">
+              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:clamp(14px,1.6vw,16px);line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Built and maintained back-end services in Node.js &amp; Express; designed MongoDB schemas.</li>
+              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:clamp(14px,1.6vw,16px);line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Integrated Google APIs &amp; OAuth — Drive, Calendar, and service-account PDF automation.</li>
+              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:clamp(14px,1.6vw,16px);line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Shipped payments (PayPal), transactional email (Nodemailer) and SMS (Twilio).</li>
+              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:clamp(14px,1.6vw,16px);line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Built auth/security layers — access &amp; refresh tokens with bcrypt and crypto.</li>
             </ul>
           </div>
         </div>
 
-        <div data-reveal style="display:grid;grid-template-columns:200px 1fr;gap:32px;padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+        <div data-reveal class="exp-row" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
           <div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--acc)">2019</div>
             <div style="font-size:13px;color:var(--tx3);margin-top:6px">Alexandria, EG</div>
           </div>
           <div>
-            <h3 style="margin:0;font-size:24px;font-weight:600">Software Development Intern <span style="color:var(--tx3);font-weight:400">· Arab Computers Co.</span></h3>
-            <ul style="margin:18px 0 0;padding:0;list-style:none;display:grid;gap:11px">
-              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:16px;line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Worked on software projects in Java and C alongside senior developers.</li>
-              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:16px;line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Attended training on software programming and tool design.</li>
+            <h3 style="margin:0;font-size:clamp(18px,2.2vw,24px);font-weight:600">Software Development Intern <span style="color:var(--tx3);font-weight:400">· Arab Computers Co.</span></h3>
+            <ul style="margin:16px 0 0;padding:0;list-style:none;display:grid;gap:11px">
+              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:clamp(14px,1.6vw,16px);line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Worked on software projects in Java and C alongside senior developers.</li>
+              <li style="position:relative;padding-left:22px;color:var(--tx2);font-size:clamp(14px,1.6vw,16px);line-height:1.55"><span style="position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--acc);border-radius:50%"></span>Attended training on software programming and tool design.</li>
             </ul>
           </div>
         </div>
@@ -167,29 +305,30 @@
     </section>
 
     <!-- SELECTED WORK -->
-    <section id="work" style="padding:0 0 120px">
-      <div style="max-width:1180px;margin:0 auto;padding:0 32px">
-        <div data-reveal style="display:flex;align-items:end;justify-content:space-between;margin-bottom:46px;gap:20px">
+    <section id="work" class="s-pad-b">
+      <div class="wrap">
+        <div data-reveal style="display:flex;align-items:end;justify-content:space-between;margin-bottom:46px;gap:20px;flex-wrap:wrap">
           <div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:14px">// Selected work</div>
-            <h2 style="margin:0;font-size:clamp(28px,3.4vw,42px);font-weight:600;letter-spacing:-0.02em">Things I've built.</h2>
+            <h2 style="margin:0;font-size:clamp(24px,3.4vw,42px);font-weight:600;letter-spacing:-0.02em">Things I've built.</h2>
           </div>
           <a class="lnk-u" onClick="{{ goWork }}" style="cursor:pointer;font-size:15px;color:var(--tx2);white-space:nowrap">All projects →</a>
         </div>
 
         <!-- featured -->
-        <a data-reveal onClick="{{ goProject }}" style="cursor:pointer;display:grid;grid-template-columns:1.05fr .95fr;gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bg2);transition:border-color .3s,transform .3s" style-hover="border-color:var(--line2);transform:translateY(-3px)">
-          <div style="padding:42px 40px">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <a data-reveal onClick="{{ goProject }}" class="feat-card" style="cursor:pointer;border:1px solid var(--line);border-radius:18px;background:var(--bg2);transition:border-color .3s,transform .3s" style-hover="border-color:var(--line2);transform:translateY(-3px)">
+          <div style="padding:clamp(24px,4vw,42px) clamp(20px,3.5vw,40px)">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
               <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#06120a;background:var(--acc);padding:5px 10px;border-radius:6px;font-weight:600">Featured</span>
               <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">2026 · Full-stack</span>
             </div>
-            <h3 style="margin:0;font-size:34px;font-weight:600;letter-spacing:-0.02em">AtlasPlanner</h3>
-            <p style="margin:14px 0 26px;font-size:17px;line-height:1.6;color:var(--tx2)">An AI travel planner that learns your personality, recommends destinations with real visa logic, and builds a day-by-day itinerary — live weather, local events and venue maps included.</p>
+            <h3 style="margin:0;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-0.02em">AtlasPlanner</h3>
+            <p style="margin:14px 0 26px;font-size:clamp(14px,1.8vw,17px);line-height:1.6;color:var(--tx2)">An AI travel planner that learns your personality, recommends destinations with real visa logic, and builds a day-by-day itinerary — live weather, local events and venue maps included.</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px">{{ atlasChips }}</div>
             <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--acc)">Read case study →</span>
           </div>
-          <div style="position:relative;min-height:340px;background:linear-gradient(135deg,var(--bg3),var(--bg2));border-left:1px solid var(--line);background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 13px);display:grid;place-items:center">
+          <!-- visual (hidden on tablet/mobile) -->
+          <div class="feat-visual" style="position:relative;min-height:340px;background:linear-gradient(135deg,var(--bg3),var(--bg2));border-left:1px solid var(--line);background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 13px);display:grid;place-items:center">
             <div style="text-align:center;padding:24px">
               <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx2);line-height:2.1">React 18 · TS<br>↓ REST/JWT<br>Python FastAPI<br>↓ httpx proxy<br>Java Spring Boot<br>↓ JPA<br>PostgreSQL 16</div>
               <div style="margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.1em">[ polyglot microservices ]</div>
@@ -198,17 +337,17 @@
         </a>
 
         <!-- two smaller -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px">
+        <div class="col-2" style="margin-top:22px">
           <div data-reveal style="border:1px solid var(--line);border-radius:18px;background:var(--bg2);padding:34px 32px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--line2);transform:translateY(-3px)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);margin-bottom:16px">GeekyAir · Service</div>
-            <h3 style="margin:0;font-size:23px;font-weight:600">Payments &amp; Notifications</h3>
-            <p style="margin:13px 0 22px;font-size:16px;line-height:1.6;color:var(--tx2)">A Node/Express service wiring PayPal checkout, Nodemailer receipts and Twilio SMS, secured with bcrypt token layers.</p>
+            <h3 style="margin:0;font-size:clamp(18px,2vw,23px);font-weight:600">Payments &amp; Notifications</h3>
+            <p style="margin:13px 0 22px;font-size:clamp(14px,1.6vw,16px);line-height:1.6;color:var(--tx2)">A Node/Express service wiring PayPal checkout, Nodemailer receipts and Twilio SMS, secured with bcrypt token layers.</p>
             <div style="display:flex;flex-wrap:wrap;gap:7px">{{ chipsA }}</div>
           </div>
           <div data-reveal style="border:1px solid var(--line);border-radius:18px;background:var(--bg2);padding:34px 32px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--line2);transform:translateY(-3px)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);margin-bottom:16px">GeekyAir · Automation</div>
-            <h3 style="margin:0;font-size:23px;font-weight:600">Google Workspace Automation</h3>
-            <p style="margin:13px 0 22px;font-size:16px;line-height:1.6;color:var(--tx2)">OAuth + service-account integrations across Google Drive and Calendar, automating document generation and PDF uploads.</p>
+            <h3 style="margin:0;font-size:clamp(18px,2vw,23px);font-weight:600">Google Workspace Automation</h3>
+            <p style="margin:13px 0 22px;font-size:clamp(14px,1.6vw,16px);line-height:1.6;color:var(--tx2)">OAuth + service-account integrations across Google Drive and Calendar, automating document generation and PDF uploads.</p>
             <div style="display:flex;flex-wrap:wrap;gap:7px">{{ chipsB }}</div>
           </div>
         </div>
@@ -216,39 +355,41 @@
     </section>
 
     <!-- SKILLS -->
-    <section id="skills" style="padding:0 0 120px">
-      <div style="max-width:1180px;margin:0 auto;padding:0 32px">
+    <section id="skills" class="s-pad-b">
+      <div class="wrap">
         <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:46px">// Stack</div>
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden">{{ skillGroups }}</div>
+        <div class="skills-grid" style="background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden">{{ skillGroups }}</div>
       </div>
     </section>
 
     <!-- EDUCATION -->
-    <section style="padding:0 0 120px">
-      <div style="max-width:1180px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:.4fr .6fr;gap:56px">
-        <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)">// Education</div>
-        <div data-reveal>
-          <h3 style="margin:0;font-size:24px;font-weight:600">B.Sc. Computer Science &amp; Communication</h3>
-          <p style="margin:8px 0 0;font-size:16px;color:var(--tx2)">Faculty of Engineering, University of Alexandria <span style="color:var(--tx3)">· 2015 — 2022</span></p>
-          <div style="margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Coursework</div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px">{{ courseChips }}</div>
-          <div style="margin-top:34px;display:flex;gap:34px;flex-wrap:wrap">
-            <div><div style="font-size:15px;font-weight:600">English</div><div style="font-size:13px;color:var(--tx3)">Professional</div></div>
-            <div><div style="font-size:15px;font-weight:600">Arabic</div><div style="font-size:13px;color:var(--tx3)">Native</div></div>
-            <div><div style="font-size:15px;font-weight:600">German</div><div style="font-size:13px;color:var(--tx3)">Elementary</div></div>
+    <section class="s-pad-b">
+      <div class="wrap">
+        <div class="split-40">
+          <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)">// Education</div>
+          <div data-reveal>
+            <h3 style="margin:0;font-size:clamp(18px,2.2vw,24px);font-weight:600">B.Sc. Computer Science &amp; Communication</h3>
+            <p style="margin:8px 0 0;font-size:clamp(14px,1.6vw,16px);color:var(--tx2)">Faculty of Engineering, University of Alexandria <span style="color:var(--tx3)">· 2015 — 2022</span></p>
+            <div style="margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Coursework</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">{{ courseChips }}</div>
+            <div style="margin-top:34px;display:flex;gap:34px;flex-wrap:wrap">
+              <div><div style="font-size:15px;font-weight:600">English</div><div style="font-size:13px;color:var(--tx3)">Professional</div></div>
+              <div><div style="font-size:15px;font-weight:600">Arabic</div><div style="font-size:13px;color:var(--tx3)">Native</div></div>
+              <div><div style="font-size:15px;font-weight:600">German</div><div style="font-size:13px;color:var(--tx3)">Elementary</div></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" style="padding:120px 0;border-top:1px solid var(--line);background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:30px 30px">
-      <div data-reveal style="max-width:1180px;margin:0 auto;padding:0 32px;text-align:center">
+    <section id="contact" class="s-pad" style="border-top:1px solid var(--line);background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:30px 30px">
+      <div data-reveal class="wrap" style="text-align:center">
         <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:22px">// Contact</div>
-        <h2 style="margin:0 auto;max-width:760px;font-size:clamp(34px,5.2vw,68px);line-height:1.04;font-weight:600;letter-spacing:-0.03em;text-wrap:balance">Let's build something solid.</h2>
-        <p style="margin:24px auto 40px;max-width:480px;font-size:18px;color:var(--tx2)">Open to back-end and full-stack roles across the EU. The fastest way to reach me:</p>
-        <a href="mailto:mkabary8@gmail.com" style="display:inline-flex;align-items:center;gap:11px;background:var(--acc);color:#06120a;font-weight:600;font-size:17px;padding:17px 30px;border-radius:13px;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-2px);box-shadow:0 16px 36px -12px var(--accdim)">mkabary8@gmail.com <span style="font-family:'JetBrains Mono',monospace">→</span></a>
-        <div style="margin-top:30px;display:flex;justify-content:center;gap:26px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--tx2)">
+        <h2 style="margin:0 auto;max-width:760px;font-size:clamp(30px,5.2vw,68px);line-height:1.04;font-weight:600;letter-spacing:-0.03em;text-wrap:balance">Let's build something solid.</h2>
+        <p style="margin:24px auto 40px;max-width:480px;font-size:clamp(15px,1.8vw,18px);color:var(--tx2)">Open to back-end and full-stack roles across the EU. The fastest way to reach me:</p>
+        <a href="mailto:mkabary8@gmail.com" style="display:inline-flex;align-items:center;gap:11px;background:var(--acc);color:#06120a;font-weight:600;font-size:clamp(14px,1.8vw,17px);padding:16px 28px;border-radius:13px;transition:transform .25s,box-shadow .25s;word-break:break-all" style-hover="transform:translateY(-2px);box-shadow:0 16px 36px -12px var(--accdim)">mkabary8@gmail.com <span style="font-family:'JetBrains Mono',monospace;flex-shrink:0">→</span></a>
+        <div style="margin-top:30px;display:flex;justify-content:center;gap:26px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--tx2);flex-wrap:wrap">
           <a class="lnk-u" href="https://github.com/MostafaQabbari" target="_blank">github ↗</a>
           <span style="color:var(--tx3)">Leipzig, Germany</span>
         </div>
@@ -259,36 +400,41 @@
   </main>
   </sc-if>
 
-  <!-- ============ WORK PAGE ============ -->
+  <!-- ════ WORK PAGE ════ -->
   <sc-if value="{{ isWork }}" hint-placeholder-val="{{ false }}">
-  <main data-screen-label="Work" style="padding:148px 0 0">
-    <div style="max-width:1180px;margin:0 auto;padding:0 32px">
+  <main data-screen-label="Work" class="s-work">
+    <div class="wrap">
       <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:16px">// Work — index</div>
-      <h1 style="margin:0;font-size:clamp(40px,6vw,76px);font-weight:600;letter-spacing:-0.03em">Selected projects<span style="color:var(--acc)">.</span></h1>
-      <p style="margin:22px 0 64px;max-width:560px;font-size:18px;color:var(--tx2)">A mix of a self-built polyglot product and production work shipped at GeekyAir.</p>
+      <h1 style="margin:0;font-size:clamp(36px,6vw,76px);font-weight:600;letter-spacing:-0.03em">Selected projects<span style="color:var(--acc)">.</span></h1>
+      <p style="margin:22px 0 64px;max-width:560px;font-size:clamp(15px,1.8vw,18px);color:var(--tx2)">A mix of a self-built polyglot product and production work shipped at GeekyAir.</p>
 
-      <a onClick="{{ goProject }}" style="cursor:pointer;display:grid;grid-template-columns:1.05fr .95fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bg2);margin-bottom:22px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--line2);transform:translateY(-3px)">
-        <div style="padding:42px 40px">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#06120a;background:var(--acc);padding:5px 10px;border-radius:6px;font-weight:600">Featured</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">2026</span></div>
-          <h3 style="margin:0;font-size:32px;font-weight:600;letter-spacing:-0.02em">AtlasPlanner</h3>
-          <p style="margin:14px 0 24px;font-size:17px;line-height:1.6;color:var(--tx2)">AI travel planner on a production-grade polyglot microservices stack — Python, Java, TypeScript, PostgreSQL and Docker.</p>
+      <a onClick="{{ goProject }}" class="feat-card" style="cursor:pointer;border:1px solid var(--line);border-radius:18px;background:var(--bg2);margin-bottom:22px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--line2);transform:translateY(-3px)">
+        <div style="padding:clamp(24px,4vw,42px) clamp(20px,3.5vw,40px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#06120a;background:var(--acc);padding:5px 10px;border-radius:6px;font-weight:600">Featured</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">2026</span>
+          </div>
+          <h3 style="margin:0;font-size:clamp(24px,3vw,32px);font-weight:600;letter-spacing:-0.02em">AtlasPlanner</h3>
+          <p style="margin:14px 0 24px;font-size:clamp(14px,1.8vw,17px);line-height:1.6;color:var(--tx2)">AI travel planner on a production-grade polyglot microservices stack — Python, Java, TypeScript, PostgreSQL and Docker.</p>
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">{{ atlasChips }}</div>
           <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--acc)">Read case study →</span>
         </div>
-        <div style="position:relative;min-height:300px;background:linear-gradient(135deg,var(--bg3),var(--bg2));border-left:1px solid var(--line);background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 13px);display:grid;place-items:center"><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.1em">[ product screenshot ]</div></div>
+        <div class="feat-visual" style="position:relative;min-height:300px;background:linear-gradient(135deg,var(--bg3),var(--bg2));border-left:1px solid var(--line);background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 13px);display:grid;place-items:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.1em">[ product screenshot ]</div>
+        </div>
       </a>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;padding-bottom:120px">
+      <div class="col-2" style="padding-bottom:80px">
         <div style="border:1px solid var(--line);border-radius:18px;background:var(--bg2);padding:34px 32px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--line2);transform:translateY(-3px)">
           <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);margin-bottom:16px">GeekyAir · Service</div>
-          <h3 style="margin:0;font-size:23px;font-weight:600">Payments &amp; Notifications</h3>
-          <p style="margin:13px 0 22px;font-size:16px;line-height:1.6;color:var(--tx2)">PayPal checkout, Nodemailer receipts and Twilio SMS, secured with bcrypt token layers.</p>
+          <h3 style="margin:0;font-size:clamp(18px,2vw,23px);font-weight:600">Payments &amp; Notifications</h3>
+          <p style="margin:13px 0 22px;font-size:clamp(14px,1.6vw,16px);line-height:1.6;color:var(--tx2)">PayPal checkout, Nodemailer receipts and Twilio SMS, secured with bcrypt token layers.</p>
           <div style="display:flex;flex-wrap:wrap;gap:7px">{{ chipsA }}</div>
         </div>
         <div style="border:1px solid var(--line);border-radius:18px;background:var(--bg2);padding:34px 32px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--line2);transform:translateY(-3px)">
           <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);margin-bottom:16px">GeekyAir · Automation</div>
-          <h3 style="margin:0;font-size:23px;font-weight:600">Google Workspace Automation</h3>
-          <p style="margin:13px 0 22px;font-size:16px;line-height:1.6;color:var(--tx2)">OAuth + service-account integrations across Drive and Calendar, automating PDF generation and uploads.</p>
+          <h3 style="margin:0;font-size:clamp(18px,2vw,23px);font-weight:600">Google Workspace Automation</h3>
+          <p style="margin:13px 0 22px;font-size:clamp(14px,1.6vw,16px);line-height:1.6;color:var(--tx2)">OAuth + service-account integrations across Drive and Calendar, automating PDF generation and uploads.</p>
           <div style="display:flex;flex-wrap:wrap;gap:7px">{{ chipsB }}</div>
         </div>
       </div>
@@ -297,33 +443,36 @@
   </main>
   </sc-if>
 
-  <!-- ============ PROJECT PAGE ============ -->
+  <!-- ════ PROJECT PAGE ════ -->
   <sc-if value="{{ isProject }}" hint-placeholder-val="{{ false }}">
-  <main data-screen-label="Project — AtlasPlanner" style="padding:128px 0 0">
-    <div style="max-width:980px;margin:0 auto;padding:0 32px">
+  <main data-screen-label="Project — AtlasPlanner" class="s-project">
+    <div class="wrap-sm">
       <a class="lnk-u" onClick="{{ goWork }}" style="cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx2)">← Back to work</a>
-      <div style="display:flex;align-items:center;gap:12px;margin:30px 0 14px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Case study</span></div>
-      <h1 style="margin:0;font-size:clamp(44px,7vw,84px);font-weight:600;letter-spacing:-0.03em;line-height:1">AtlasPlanner</h1>
-      <p style="margin:22px 0 28px;max-width:660px;font-size:20px;line-height:1.55;color:var(--tx2)">An AI-powered travel planner that learns your personality, recommends destinations with accurate visa logic, and builds a complete day-by-day itinerary — with real weather, local events, venue photos and Google Maps links.</p>
+      <div style="display:flex;align-items:center;gap:12px;margin:30px 0 14px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Case study</span>
+      </div>
+      <h1 style="margin:0;font-size:clamp(40px,7vw,84px);font-weight:600;letter-spacing:-0.03em;line-height:1">AtlasPlanner</h1>
+      <p style="margin:22px 0 28px;max-width:660px;font-size:clamp(15px,2vw,20px);line-height:1.55;color:var(--tx2)">An AI-powered travel planner that learns your personality, recommends destinations with accurate visa logic, and builds a complete day-by-day itinerary — with real weather, local events, venue photos and Google Maps links.</p>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">{{ atlasChips }}</div>
       <div style="display:flex;gap:14px;flex-wrap:wrap">
         <a href="https://github.com/MostafaQabbari/atlasplanner" target="_blank" style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line2);color:var(--tx);font-weight:500;font-size:15px;padding:12px 22px;border-radius:11px;transition:background .25s" style-hover="background:var(--bg2)">View on GitHub ↗</a>
       </div>
     </div>
 
-    <!-- hero shot placeholder -->
-    <div style="max-width:980px;margin:54px auto 0;padding:0 32px">
-      <div style="aspect-ratio:16/8;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,var(--bg3),var(--bg2));background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 14px);display:grid;place-items:center"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);text-transform:uppercase;letter-spacing:.12em">[ app screenshot — plan view ]</span></div>
+    <div class="wrap-sm" style="margin-top:54px">
+      <div style="aspect-ratio:16/8;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,var(--bg3),var(--bg2));background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 14px);display:grid;place-items:center">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);text-transform:uppercase;letter-spacing:.12em;padding:0 20px;text-align:center">[ app screenshot — plan view ]</span>
+      </div>
     </div>
 
-    <div style="max-width:980px;margin:0 auto;padding:0 32px">
+    <div class="wrap-sm">
       <!-- overview -->
       <section style="padding:80px 0;border-bottom:1px solid var(--line)">
-        <div style="display:grid;grid-template-columns:.34fr .66fr;gap:48px">
+        <div class="split-34">
           <h2 style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Overview</h2>
           <div>
-            <p style="margin:0 0 18px;font-size:19px;line-height:1.7;color:var(--tx2)">Built as a portfolio project targeting EU Blue Card roles in Germany, AtlasPlanner demonstrates a <span style="color:var(--tx)">production-grade polyglot microservices architecture</span> where each language earns its place.</p>
-            <p style="margin:0;font-size:19px;line-height:1.7;color:var(--tx2)">Python orchestrates the AI and external APIs, Java owns auth and data persistence, React drives the experience — and FastAPI never touches the database directly, always proxying through Spring Boot to preserve data ownership boundaries.</p>
+            <p style="margin:0 0 18px;font-size:clamp(15px,2vw,19px);line-height:1.7;color:var(--tx2)">Built as a portfolio project targeting EU Blue Card roles in Germany, AtlasPlanner demonstrates a <span style="color:var(--tx)">production-grade polyglot microservices architecture</span> where each language earns its place.</p>
+            <p style="margin:0;font-size:clamp(15px,2vw,19px);line-height:1.7;color:var(--tx2)">Python orchestrates the AI and external APIs, Java owns auth and data persistence, React drives the experience — and FastAPI never touches the database directly, always proxying through Spring Boot to preserve data ownership boundaries.</p>
           </div>
         </div>
       </section>
@@ -331,7 +480,7 @@
       <!-- what it does -->
       <section style="padding:80px 0;border-bottom:1px solid var(--line)">
         <h2 style="margin:0 0 36px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// What it does</h2>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden">{{ featureCells }}</div>
+        <div class="col-2-1px" style="background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden">{{ featureCells }}</div>
       </section>
 
       <!-- architecture -->
@@ -351,11 +500,11 @@
   </main>
   </sc-if>
 
-  <!-- ============ 404 PAGE ============ -->
+  <!-- ════ 404 ════ -->
   <sc-if value="{{ is404 }}" hint-placeholder-val="{{ false }}">
-  <main data-screen-label="404" style="min-height:100vh;display:grid;place-items:center;background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:30px 30px">
-    <div style="text-align:center;padding:0 32px;max-width:620px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:clamp(90px,18vw,200px);font-weight:600;line-height:1;letter-spacing:-0.03em">4<span style="color:var(--acc)">0</span>4</div>
+  <main data-screen-label="404" style="min-height:100vh;display:grid;place-items:center;background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:30px 30px;padding:0 20px">
+    <div style="text-align:center;max-width:620px;width:100%">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:clamp(80px,18vw,200px);font-weight:600;line-height:1;letter-spacing:-0.03em">4<span style="color:var(--acc)">0</span>4</div>
       <div style="margin:18px auto 0;max-width:460px;text-align:left;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.9;color:var(--tx2)"><span style="color:#ff5f57">Error:</span> route not found<br><span style="color:var(--tx3)">  at</span> Router.resolve(<span style="color:var(--acc)">req.path</span>)<br><span style="color:var(--tx3)">  status</span> = 404 — this page doesn't exist.</div>
       <div style="margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
         <a onClick="{{ goHome }}" style="cursor:pointer;background:var(--acc);color:#06120a;font-weight:600;font-size:15px;padding:14px 24px;border-radius:11px">← Back home</a>
@@ -369,12 +518,15 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { theme: 'dark', page: 'home' };
+  state = { theme: 'dark', page: 'home', menuOpen: false };
 
   componentDidMount(){ this.applyTheme(); this.bindReveal(); }
   componentDidUpdate(prev){
     if(prev.theme !== this.state.theme) this.applyTheme();
-    if(prev.page !== this.state.page){ window.scrollTo(0,0); }
+    if(prev.page !== this.state.page){
+      window.scrollTo(0,0);
+      if(this.state.menuOpen) this.setState({ menuOpen: false });
+    }
     this.bindReveal();
   }
   applyTheme(){ document.documentElement.setAttribute('data-theme', this.state.theme); }
@@ -401,8 +553,11 @@ class Component extends DCLogic {
     if(el){ const y = el.getBoundingClientRect().top + window.scrollY - 70; window.scrollTo({top:y,behavior:'smooth'}); }
   }
   goSection(id){
-    if(this.state.page !== 'home'){ this.setState({page:'home'}, ()=> setTimeout(()=>this._scroll(id), 80)); }
-    else this._scroll(id);
+    if(this.state.page !== 'home'){
+      this.setState({page:'home', menuOpen:false}, ()=> setTimeout(()=>this._scroll(id), 80));
+    } else {
+      this.setState({menuOpen:false}, ()=> this._scroll(id));
+    }
   }
 
   chip(text, fill){
@@ -444,9 +599,8 @@ class Component extends DCLogic {
       ['Infra','Docker · Docker Compose'],
     ];
 
-    const cellStyle = { background:'var(--bg2)', padding:'26px 26px' };
     const featureCells = features.map(([t,d],i)=>
-      React.createElement('div',{key:i,style:cellStyle},
+      React.createElement('div',{key:i,style:{background:'var(--bg2)',padding:'26px'}},
         React.createElement('h4',{style:{margin:'0 0 9px',fontSize:'18px',fontWeight:600}},t),
         React.createElement('p',{style:{margin:0,fontSize:'15px',lineHeight:1.6,color:'var(--tx2)'}},d)
       )
@@ -469,7 +623,7 @@ class Component extends DCLogic {
     });
 
     const stackRows = stack.map(([layer,tech],i)=>
-      React.createElement('div',{key:i,style:{display:'grid',gridTemplateColumns:'200px 1fr',gap:'20px',padding:'18px 24px',borderTop:i?'1px solid var(--line)':'none',background:'var(--bg2)'}},
+      React.createElement('div',{key:i,className:'stack-row',style:{padding:'18px 24px',borderTop:i?'1px solid var(--line)':'none',background:'var(--bg2)'}},
         React.createElement('div',{style:{fontWeight:600,fontSize:'15px'}},layer),
         React.createElement('div',{style:{fontFamily:"'JetBrains Mono',monospace",fontSize:'13.5px',color:'var(--tx2)',lineHeight:1.5}},tech)
       )
@@ -479,16 +633,20 @@ class Component extends DCLogic {
       React.createElement('span',{key:i,style:{display:'inline-flex',alignItems:'center',gap:'34px'}}, t, React.createElement('span',{style:{color:'var(--acc)'}},'/'))
     );
 
+    const menuOpen = this.state.menuOpen;
+
     return {
       isHome: this.state.page==='home',
       isWork: this.state.page==='work',
       isProject: this.state.page==='project',
       is404: this.state.page==='404',
       themeLabel: this.state.theme==='dark' ? 'Light' : 'Dark',
-      toggleTheme: ()=> this.setState(s=>({theme: s.theme==='dark'?'light':'dark'})),
-      goHome: ()=> this.setState({page:'home'}),
-      goWork: ()=> this.setState({page:'work'}),
-      goProject: ()=> this.setState({page:'project'}),
+      toggleTheme: ()=> this.setState(s=>({theme: s.theme==='dark'?'light':'dark', menuOpen:false})),
+      toggleMenu: ()=> this.setState(s=>({ menuOpen: !s.menuOpen })),
+      menuClass: menuOpen ? 'open' : '',
+      goHome: ()=> this.setState({page:'home', menuOpen:false}),
+      goWork: ()=> this.setState({page:'work', menuOpen:false}),
+      goProject: ()=> this.setState({page:'project', menuOpen:false}),
       goAbout: ()=> this.goSection('about'),
       goSkills: ()=> this.goSection('skills'),
       goContact: ()=> this.goSection('contact'),
