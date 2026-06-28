@@ -153,13 +153,28 @@
 
   /* ── marquee strip ── */
   .marquee-strip{overflow-x:hidden;overflow-y:visible}
+
+  /* ── contact dropdown ── */
+  .contact-drop{position:absolute;top:calc(100% + 14px);right:-16px;min-width:276px;background:var(--bg2);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;z-index:200;box-shadow:var(--shadow);animation:cdfadeIn .18s ease}
+  @keyframes cdfadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+  /* ── gallery ── */
+  .gallery-wrap{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--bg3)}
+  .gallery-img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;object-position:top}
+  .gallery-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(10,10,11,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:50%;width:40px;height:40px;color:var(--tx);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;padding:0;transition:background .2s}
+  .gallery-nav:hover{background:rgba(10,10,11,.92)}
+  .gallery-counter{position:absolute;bottom:12px;right:12px;background:rgba(10,10,11,.72);backdrop-filter:blur(6px);border-radius:6px;padding:3px 9px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx2)}
+  .gallery-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .gallery-thumbs::-webkit-scrollbar{display:none}
+  .gallery-thumb-btn{padding:0;background:none;cursor:pointer;flex-shrink:0;border-radius:7px;overflow:hidden;transition:border-color .2s,opacity .2s;width:80px;height:54px}
+  @media(max-width:767px){.gallery-thumb-btn{width:56px;height:40px}.gallery-nav{width:34px;height:34px;font-size:18px}}
 </style>
 </helmet>
 
 <div style="font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh">
 
   <!-- ════ CLICK-AWAY OVERLAY (closes mobile menu) ════ -->
-  <div class="mob-overlay" style="display:{{ overlayDisplay }}" onClick="{{ toggleMenu }}"></div>
+  <div class="mob-overlay" style="display:{{ overlayDisplay }}" onClick="{{ closeAll }}"></div>
 
   <!-- ════ NAV ════ -->
   <nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;backdrop-filter:saturate(140%) blur(14px);background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--line)">
@@ -173,7 +188,10 @@
       <a class="lnk-u" onClick="{{ goWork }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">Work</a>
       <a class="lnk-u" onClick="{{ goAbout }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">About</a>
       <a class="lnk-u" onClick="{{ goSkills }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">Stack</a>
-      <a class="lnk-u" onClick="{{ goContact }}" style="cursor:pointer;font-size:14px;color:var(--tx2)">Contact</a>
+      <div style="position:relative">
+        <a class="lnk-u" onClick="{{ toggleContact }}" style="cursor:pointer;font-size:14px;color:var(--tx2);user-select:none">Contact</a>
+        {{ contactDrop }}
+      </div>
       <button type="button" onClick="{{ toggleTheme }}" title="Toggle theme" style="display:flex;align-items:center;gap:8px;cursor:pointer;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--tx2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase">
         <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);display:inline-block"></span>{{ themeLabel }}
       </button>
@@ -197,6 +215,13 @@
       <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);display:inline-block;flex-shrink:0"></span>
       Switch to {{ themeLabel }} mode
     </button>
+    <div style="padding:10px 4px 2px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3)">// Contact</div>
+    <a href="mailto:mkabary8@gmail.com">mkabary8@gmail.com</a>
+    <a href="https://wa.me/4917651102270" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:8px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp ↗
+    </a>
+    <a href="tel:+4917651102270">+49 176 511 022 70</a>
   </div>
 
   <!-- ════ HOME ════ -->
@@ -323,6 +348,7 @@
           <div style="padding:clamp(24px,4vw,42px) clamp(20px,3.5vw,40px)">
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
               <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#06120a;background:var(--acc);padding:5px 10px;border-radius:6px;font-weight:600">Featured</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#5b21b6;padding:5px 10px;border-radius:6px;font-weight:600">⚡ AI-Powered</span>
               <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">2026 · Full-stack</span>
             </div>
             <h3 style="margin:0;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-0.02em">AtlasPlanner</h3>
@@ -331,11 +357,8 @@
             <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--acc)">Read case study →</span>
           </div>
           <!-- visual (hidden on tablet/mobile) -->
-          <div class="feat-visual" style="position:relative;min-height:340px;background:linear-gradient(135deg,var(--bg3),var(--bg2));border-left:1px solid var(--line);background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 13px);display:grid;place-items:center">
-            <div style="text-align:center;padding:24px">
-              <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx2);line-height:2.1">React 18 · TS<br>↓ REST/JWT<br>Python FastAPI<br>↓ httpx proxy<br>Java Spring Boot<br>↓ JPA<br>PostgreSQL 16</div>
-              <div style="margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.1em">[ polyglot microservices ]</div>
-            </div>
+          <div class="feat-visual" style="position:relative;min-height:340px;border-left:1px solid var(--line);overflow:hidden">
+            <img src="public/Screenshot%202026-06-28%20152817.png" alt="AtlasPlanner — hero screen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:.88">
           </div>
         </a>
 
@@ -408,7 +431,17 @@
         <h2 style="margin:0 auto;max-width:760px;font-size:clamp(30px,5.2vw,68px);line-height:1.04;font-weight:600;letter-spacing:-0.03em;text-wrap:balance">Let's build something solid.</h2>
         <p style="margin:24px auto 40px;max-width:480px;font-size:clamp(15px,1.8vw,18px);color:var(--tx2)">Open to full-stack roles across the EU. The fastest way to reach me:</p>
         <a href="mailto:mkabary8@gmail.com" style="display:inline-flex;align-items:center;gap:11px;background:var(--acc);color:#06120a;font-weight:600;font-size:clamp(14px,1.8vw,17px);padding:16px 28px;border-radius:13px;transition:transform .25s,box-shadow .25s;word-break:break-all" style-hover="transform:translateY(-2px);box-shadow:0 16px 36px -12px var(--accdim)">mkabary8@gmail.com <span style="font-family:'JetBrains Mono',monospace;flex-shrink:0">→</span></a>
-        <div style="margin-top:30px;display:flex;justify-content:center;gap:26px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--tx2);flex-wrap:wrap">
+        <div style="margin-top:22px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
+          <a href="https://wa.me/4917651102270" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line2);color:var(--tx);font-weight:500;font-size:15px;padding:13px 20px;border-radius:11px;transition:background .25s" style-hover="background:var(--bg2)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#25d366" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp ↗
+          </a>
+          <a href="tel:+4917651102270" style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line2);color:var(--tx2);font-weight:500;font-size:15px;padding:13px 20px;border-radius:11px;transition:background .25s" style-hover="background:var(--bg2)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            +49 176 511 022 70
+          </a>
+        </div>
+        <div style="margin-top:26px;display:flex;justify-content:center;gap:26px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--tx2);flex-wrap:wrap">
           <a class="lnk-u" href="https://github.com/MostafaQabbari" target="_blank">github ↗</a>
           <span style="color:var(--tx3)">Leipzig, Germany</span>
         </div>
@@ -431,6 +464,7 @@
         <div style="padding:clamp(24px,4vw,42px) clamp(20px,3.5vw,40px)">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap">
             <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#06120a;background:var(--acc);padding:5px 10px;border-radius:6px;font-weight:600">Featured</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#5b21b6;padding:5px 10px;border-radius:6px;font-weight:600">⚡ AI-Powered</span>
             <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">2026</span>
           </div>
           <h3 style="margin:0;font-size:clamp(24px,3vw,32px);font-weight:600;letter-spacing:-0.02em">AtlasPlanner</h3>
@@ -438,8 +472,8 @@
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">{{ atlasChips }}</div>
           <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--acc)">Read case study →</span>
         </div>
-        <div class="feat-visual" style="position:relative;min-height:300px;background:linear-gradient(135deg,var(--bg3),var(--bg2));border-left:1px solid var(--line);background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 13px);display:grid;place-items:center">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.1em">[ product screenshot ]</div>
+        <div class="feat-visual" style="position:relative;min-height:300px;border-left:1px solid var(--line);overflow:hidden">
+          <img src="public/Screenshot%202026-06-28%20152817.png" alt="AtlasPlanner — hero screen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:.88">
         </div>
       </a>
 
@@ -483,21 +517,22 @@
   <main data-screen-label="Project — AtlasPlanner" class="s-project">
     <div class="wrap-sm">
       <a class="lnk-u" onClick="{{ goWork }}" style="cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx2)">← Back to work</a>
-      <div style="display:flex;align-items:center;gap:12px;margin:30px 0 14px">
+      <div style="display:flex;align-items:center;gap:12px;margin:30px 0 14px;flex-wrap:wrap">
         <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Case study</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#5b21b6;padding:4px 10px;border-radius:6px;font-weight:600">⚡ AI-Powered</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a78bfa;background:rgba(109,40,217,.12);border:1px solid rgba(109,40,217,.3);padding:4px 10px;border-radius:6px;font-weight:600">Claude API</span>
       </div>
       <h1 style="margin:0;font-size:clamp(40px,7vw,84px);font-weight:600;letter-spacing:-0.03em;line-height:1">AtlasPlanner</h1>
-      <p style="margin:22px 0 28px;max-width:660px;font-size:clamp(15px,2vw,20px);line-height:1.55;color:var(--tx2)">An AI-powered travel planner that learns your personality, recommends destinations with accurate visa logic, and builds a complete day-by-day itinerary — with real weather, local events, venue photos and Google Maps links.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">{{ atlasChips }}</div>
-      <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <p style="margin:22px 0 28px;max-width:660px;font-size:clamp(15px,2vw,20px);line-height:1.55;color:var(--tx2)">A full-stack travel planner that uses the <span style="color:var(--tx)">Claude API (Anthropic)</span> to generate smart, personalized trip itineraries — with live weather, local events, and booking links. Built on a polyglot microservices stack: Python, Java, TypeScript, and PostgreSQL.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">{{ atlasChipsAll }}</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
         <a href="https://github.com/MostafaQabbari/atlasplanner" target="_blank" style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line2);color:var(--tx);font-weight:500;font-size:15px;padding:12px 22px;border-radius:11px;transition:background .25s" style-hover="background:var(--bg2)">View on GitHub ↗</a>
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx3);border:1px solid var(--line);padding:8px 14px;border-radius:8px">🚀 Deployment Coming Soon</span>
       </div>
     </div>
 
     <div class="wrap-sm" style="margin-top:54px">
-      <div style="aspect-ratio:16/8;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,var(--bg3),var(--bg2));background-image:repeating-linear-gradient(135deg,var(--grid) 0 1px,transparent 1px 14px);display:grid;place-items:center">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3);text-transform:uppercase;letter-spacing:.12em;padding:0 20px;text-align:center">[ app screenshot — plan view ]</span>
-      </div>
+      {{ atlasGallery }}
     </div>
 
     <div class="wrap-sm">
@@ -553,7 +588,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { theme: 'dark', page: 'home', menuOpen: false };
+  state = { theme: 'dark', page: 'home', menuOpen: false, contactOpen: false, galleryIdx: 0 };
 
   componentDidMount(){ this.applyTheme(); this.bindReveal(); }
   componentDidUpdate(prev){
@@ -561,6 +596,8 @@ class Component extends DCLogic {
     if(prev.page !== this.state.page){
       window.scrollTo(0,0);
       if(this.state.menuOpen) this.setState({ menuOpen: false });
+      if(this.state.contactOpen) this.setState({ contactOpen: false });
+      this.setState({ galleryIdx: 0 });
     }
     this.bindReveal();
   }
@@ -666,6 +703,54 @@ class Component extends DCLogic {
       )
     );
 
+    /* ── screenshot gallery ── */
+    const shots = [
+      ['public/Screenshot%202026-06-28%20152817.png','Hero — landing page'],
+      ['public/Screenshot%202026-06-28%20153904.png','AI destination recommendations'],
+      ['public/Screenshot%202026-06-28%20153002.png','Dashboard — saved plans'],
+      ['public/Screenshot%202026-06-28%20153219.png','Trip detail — Barcelona'],
+      ['public/Screenshot%202026-06-28%20153306.png','Day itinerary with live events'],
+      ['public/Screenshot%202026-06-28%20153720.png','Onboarding quiz flow'],
+    ];
+    const gIdx = this.state.galleryIdx || 0;
+    const navBtn = (dir) => React.createElement('button',{
+      className:'gallery-nav',
+      style:{[dir==='prev'?'left':'right']:'12px'},
+      onClick:(e)=>{e.stopPropagation();this.setState(s=>({galleryIdx:dir==='prev'?Math.max(0,(s.galleryIdx||0)-1):Math.min(shots.length-1,(s.galleryIdx||0)+1)}));}
+    }, dir==='prev'?'‹':'›');
+    const atlasGallery = React.createElement('div',null,
+      React.createElement('div',{className:'gallery-wrap'},
+        React.createElement('img',{className:'gallery-img',src:shots[gIdx][0],alt:shots[gIdx][1]}),
+        gIdx>0 && navBtn('prev'),
+        gIdx<shots.length-1 && navBtn('next'),
+        React.createElement('div',{className:'gallery-counter'},`${gIdx+1} / ${shots.length}`)
+      ),
+      React.createElement('div',{className:'gallery-thumbs'},
+        shots.map(([src,label],i)=>React.createElement('button',{
+          key:i,className:'gallery-thumb-btn',
+          style:{border:`2px solid ${i===gIdx?'var(--acc)':'transparent'}`,opacity:i===gIdx?1:0.5},
+          onClick:()=>this.setState({galleryIdx:i}),title:label
+        }, React.createElement('img',{src,alt:label,style:{width:'100%',height:'100%',objectFit:'cover',objectPosition:'top',display:'block'}})))
+      )
+    );
+
+    /* ── contact dropdown ── */
+    const contactDrop = this.state.contactOpen ? React.createElement('div',{className:'contact-drop'},
+      React.createElement('div',{style:{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',letterSpacing:'.1em',textTransform:'uppercase',color:'var(--tx3)',marginBottom:'14px'}},'// Get in touch'),
+      React.createElement('a',{href:'mailto:mkabary8@gmail.com',onClick:()=>this.setState({contactOpen:false}),style:{display:'flex',alignItems:'center',gap:'10px',color:'var(--tx)',fontSize:'14px',padding:'9px 0',borderBottom:'1px solid var(--line)',textDecoration:'none'}},
+        React.createElement('svg',{width:14,height:14,viewBox:'0 0 24 24',fill:'currentColor',style:{flexShrink:0}},React.createElement('path',{d:'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'})),
+        'mkabary8@gmail.com'
+      ),
+      React.createElement('a',{href:'https://wa.me/4917651102270',target:'_blank',rel:'noopener noreferrer',onClick:()=>this.setState({contactOpen:false}),style:{display:'flex',alignItems:'center',gap:'10px',color:'var(--tx)',fontSize:'14px',padding:'9px 0',borderBottom:'1px solid var(--line)',textDecoration:'none'}},
+        React.createElement('svg',{width:14,height:14,viewBox:'0 0 24 24',fill:'#25d366',style:{flexShrink:0}},React.createElement('path',{d:'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z'})),
+        React.createElement('span',null,'WhatsApp ↗')
+      ),
+      React.createElement('a',{href:'tel:+4917651102270',onClick:()=>this.setState({contactOpen:false}),style:{display:'flex',alignItems:'center',gap:'10px',color:'var(--tx2)',fontSize:'14px',padding:'9px 0',textDecoration:'none'}},
+        React.createElement('svg',{width:14,height:14,viewBox:'0 0 24 24',fill:'currentColor',style:{flexShrink:0}},React.createElement('path',{d:'M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z'})),
+        '+49 176 511 022 70'
+      )
+    ) : null;
+
     const ticker = ['Node.js','React','MongoDB','PostgreSQL','Express','TypeScript','JavaScript','Docker','JWT','REST API','Angular','AWS'].map((t,i)=>
       React.createElement('span',{key:i,style:{display:'inline-flex',alignItems:'center',gap:'34px'}}, t, React.createElement('span',{style:{color:'var(--acc)'}},'/'))
     );
@@ -682,20 +767,23 @@ class Component extends DCLogic {
       toggleMenu: ()=> this.setState(s=>({ menuOpen: !s.menuOpen })),
       menuClass: menuOpen ? 'open' : '',
       menuDisplay: menuOpen ? 'flex' : 'none',
-      overlayDisplay: menuOpen ? 'block' : 'none',
-      goHome: ()=> this.setState({page:'home', menuOpen:false}),
-      goWork: ()=> this.setState({page:'work', menuOpen:false}),
-      goProject: ()=> this.setState({page:'project', menuOpen:false}),
+      overlayDisplay: (menuOpen || this.state.contactOpen) ? 'block' : 'none',
+      goHome: ()=> this.setState({page:'home', menuOpen:false, contactOpen:false}),
+      goWork: ()=> this.setState({page:'work', menuOpen:false, contactOpen:false}),
+      goProject: ()=> this.setState({page:'project', menuOpen:false, contactOpen:false}),
       goAbout: ()=> this.goSection('about'),
       goSkills: ()=> this.goSection('skills'),
       goContact: ()=> this.goSection('contact'),
+      toggleContact: ()=> this.setState(s=>({contactOpen:!s.contactOpen, menuOpen:false})),
+      closeAll: ()=> this.setState({menuOpen:false, contactOpen:false}),
       atlasChips: atlas.slice(0,6).map(s=>this.chip(s,false)),
+      atlasChipsAll: atlas.map(s=>this.chip(s, s==='Claude AI')),
       chipsLegal: ['Node.js','Express','JWT','PDF Gen','Nodemailer'].map(s=>this.chip(s,false)),
       chipsCancer: ['JavaScript','D3.js','REST API','HTML/CSS'].map(s=>this.chip(s,false)),
       chipsJada: ['React','Node.js','MongoDB','REST API'].map(s=>this.chip(s,false)),
       chipsMERN: ['MongoDB','Express','React','Node.js'].map(s=>this.chip(s,false)),
       skillGroups, courseChips: courses.map(s=>this.chip(s,false)),
-      featureCells, archFlow, stackRows,
+      featureCells, archFlow, stackRows, atlasGallery, contactDrop,
       tickerA: ticker,
     };
   }
