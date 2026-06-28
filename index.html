@@ -587,6 +587,34 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+/* ── AtlasPlanner screenshot gallery — defined once, outside the class ── */
+const ATLAS_SHOTS = [
+  ['public/Screenshot%202026-06-28%20152817.png','Hero — landing page'],
+  ['public/Screenshot%202026-06-28%20153904.png','AI destination recommendations'],
+  ['public/Screenshot%202026-06-28%20153002.png','Dashboard — saved plans'],
+  ['public/Screenshot%202026-06-28%20153219.png','Trip detail — Barcelona'],
+  ['public/Screenshot%202026-06-28%20153306.png','Day itinerary with live events'],
+  ['public/Screenshot%202026-06-28%20153720.png','Onboarding quiz flow'],
+];
+function AtlasGallery() {
+  const [idx, setIdx] = React.useState(0);
+  return React.createElement('div', null,
+    React.createElement('div', {className:'gallery-wrap'},
+      React.createElement('img', {className:'gallery-img', src:ATLAS_SHOTS[idx][0], alt:ATLAS_SHOTS[idx][1]}),
+      idx > 0 && React.createElement('button', {className:'gallery-nav', style:{left:'12px'}, onClick:(e)=>{e.stopPropagation();setIdx(idx-1);}}, '‹'),
+      idx < ATLAS_SHOTS.length-1 && React.createElement('button', {className:'gallery-nav', style:{right:'12px'}, onClick:(e)=>{e.stopPropagation();setIdx(idx+1);}}, '›'),
+      React.createElement('div', {className:'gallery-counter'}, `${idx+1} / ${ATLAS_SHOTS.length}`)
+    ),
+    React.createElement('div', {className:'gallery-thumbs'},
+      ATLAS_SHOTS.map(([src,label],i) => React.createElement('button', {
+        key:i, className:'gallery-thumb-btn',
+        style:{border:`2px solid ${i===idx?'var(--acc)':'transparent'}`, opacity:i===idx?1:0.5},
+        onClick:()=>setIdx(i), title:label
+      }, React.createElement('img', {src, alt:label, style:{width:'100%',height:'100%',objectFit:'cover',objectPosition:'top',display:'block'}})))
+    )
+  );
+}
+
 class Component extends DCLogic {
   state = { theme: 'dark', page: 'home', menuOpen: false, contactOpen: false, galleryIdx: 0 };
 
@@ -597,7 +625,6 @@ class Component extends DCLogic {
       window.scrollTo(0,0);
       if(this.state.menuOpen) this.setState({ menuOpen: false });
       if(this.state.contactOpen) this.setState({ contactOpen: false });
-      this.setState({ galleryIdx: 0 });
     }
     this.bindReveal();
   }
@@ -703,36 +730,8 @@ class Component extends DCLogic {
       )
     );
 
-    /* ── screenshot gallery ── */
-    const shots = [
-      ['public/Screenshot%202026-06-28%20152817.png','Hero — landing page'],
-      ['public/Screenshot%202026-06-28%20153904.png','AI destination recommendations'],
-      ['public/Screenshot%202026-06-28%20153002.png','Dashboard — saved plans'],
-      ['public/Screenshot%202026-06-28%20153219.png','Trip detail — Barcelona'],
-      ['public/Screenshot%202026-06-28%20153306.png','Day itinerary with live events'],
-      ['public/Screenshot%202026-06-28%20153720.png','Onboarding quiz flow'],
-    ];
-    const gIdx = this.state.galleryIdx || 0;
-    const navBtn = (dir) => React.createElement('button',{
-      className:'gallery-nav',
-      style:{[dir==='prev'?'left':'right']:'12px'},
-      onClick:(e)=>{e.stopPropagation();this.setState(s=>({galleryIdx:dir==='prev'?Math.max(0,(s.galleryIdx||0)-1):Math.min(shots.length-1,(s.galleryIdx||0)+1)}));}
-    }, dir==='prev'?'‹':'›');
-    const atlasGallery = React.createElement('div',null,
-      React.createElement('div',{className:'gallery-wrap'},
-        React.createElement('img',{className:'gallery-img',src:shots[gIdx][0],alt:shots[gIdx][1]}),
-        gIdx>0 && navBtn('prev'),
-        gIdx<shots.length-1 && navBtn('next'),
-        React.createElement('div',{className:'gallery-counter'},`${gIdx+1} / ${shots.length}`)
-      ),
-      React.createElement('div',{className:'gallery-thumbs'},
-        shots.map(([src,label],i)=>React.createElement('button',{
-          key:i,className:'gallery-thumb-btn',
-          style:{border:`2px solid ${i===gIdx?'var(--acc)':'transparent'}`,opacity:i===gIdx?1:0.5},
-          onClick:()=>this.setState({galleryIdx:i}),title:label
-        }, React.createElement('img',{src,alt:label,style:{width:'100%',height:'100%',objectFit:'cover',objectPosition:'top',display:'block'}})))
-      )
-    );
+    /* ── screenshot gallery — AtlasGallery defined at module scope above the class ── */
+    const atlasGallery = React.createElement(AtlasGallery, null);
 
     /* ── contact dropdown ── */
     const contactDrop = this.state.contactOpen ? React.createElement('div',{className:'contact-drop'},
