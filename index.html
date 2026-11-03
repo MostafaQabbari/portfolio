@@ -245,7 +245,7 @@
             </div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:18px">// Backend &amp; Full-Stack Engineer</div>
             <h1 style="margin:0;font-size:clamp(42px,6.4vw,86px);line-height:0.98;font-weight:600;letter-spacing:-0.03em">Mostafa<br>Saad<span style="color:var(--acc)">.</span></h1>
-            <p style="max-width:500px;margin:24px 0 0;font-size:clamp(16px,2vw,19px);line-height:1.6;color:var(--tx2)">I build APIs and full-stack apps — <span style="color:var(--tx)">Node.js, TypeScript, PostgreSQL, React</span> — and I'm currently building an event-driven telemetry pipeline on <span style="color:var(--tx)">MQTT and Kafka</span>.</p>
+            <p style="max-width:500px;margin:24px 0 0;font-size:clamp(16px,2vw,19px);line-height:1.6;color:var(--tx2)">I build APIs and full-stack apps — <span style="color:var(--tx)">Node.js, TypeScript, PostgreSQL, React</span> — and event-driven IoT backends in <span style="color:var(--tx)">Python and TypeScript</span> on <span style="color:var(--tx)">MQTT, Kafka and TimescaleDB</span>.</p>
             <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:34px">
               <a onClick="{{ goWork }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:9px;background:var(--acc);color:#06120a;font-weight:600;font-size:15px;padding:13px 22px;border-radius:11px;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-2px);box-shadow:0 14px 30px -10px var(--accdim)">View work <span style="font-family:'JetBrains Mono',monospace">→</span></a>
               <a onClick="{{ goContact }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line2);color:var(--tx);font-weight:500;font-size:15px;padding:13px 22px;border-radius:11px;transition:background .25s" style-hover="background:var(--bg2)">Get in touch</a>
@@ -296,7 +296,7 @@
           <div data-reveal>
             <h2 style="margin:0 0 26px;font-size:clamp(24px,3.4vw,42px);line-height:1.12;font-weight:600;letter-spacing:-0.02em;text-wrap:balance">Backend-minded full-stack engineer — clean APIs, solid data models, systems that stay observable.</h2>
             <p style="margin:0 0 18px;font-size:clamp(16px,2vw,18px);line-height:1.7;color:var(--tx2)">I'm a full-stack developer with strong grounding in <span style="color:var(--tx)">Node.js, TypeScript, Express and MongoDB</span> and a clear eye for the right tool at every layer — from REST API design to React and Angular frontends.</p>
-            <p style="margin:0 0 18px;font-size:clamp(16px,2vw,18px);line-height:1.7;color:var(--tx2)">I'm now going deeper on the backend side: <span style="color:var(--tx)">message-driven architectures with MQTT and Apache Kafka</span>, time-series storage, and testable, deterministic business logic. <span style="color:var(--tx)">Speicherlotse</span> — a telemetry cloud for home energy storage — is my hands-on project for exactly that, built in public on GitHub.</p>
+            <p style="margin:0 0 18px;font-size:clamp(16px,2vw,18px);line-height:1.7;color:var(--tx2)">I'm now going deeper on the backend side: <span style="color:var(--tx)">message-driven architectures with MQTT and Apache Kafka</span>, time-series storage, and testable, deterministic business logic. <span style="color:var(--tx)">Speicherlotse</span> — a telemetry cloud for home energy storage — is my hands-on project for exactly that, built in public on GitHub, and <span style="color:var(--tx)">Heatbeat</span> applies the same ideas in Python to heating plants: lossless MQTT ingest, tenant isolation in the database and safe remote control.</p>
             <p style="margin:0;font-size:clamp(16px,2vw,18px);line-height:1.7;color:var(--tx2)">A quick learner with a strong work ethic — I like turning fuzzy requirements into clean APIs, sensible data models, and interfaces that ship. ready to move anywhere in Germany for the right role.</p>
           </div>
         </div>
@@ -354,6 +354,27 @@
           </div>
           <a class="lnk-u" onClick="{{ goWork }}" style="cursor:pointer;font-size:15px;color:var(--tx2);white-space:nowrap">All projects →</a>
         </div>
+
+        <!-- Heatbeat (MQTT + TimescaleDB, Python) -->
+        <a data-reveal onClick="{{ goHeatbeat }}" class="feat-card" style="cursor:pointer;margin-bottom:22px;border:1px solid var(--line2);border-radius:18px;background:var(--bg2);transition:border-color .3s,transform .3s" style-hover="border-color:var(--acc);transform:translateY(-3px)">
+          <div style="padding:clamp(24px,4vw,42px) clamp(20px,3.5vw,40px)">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#06120a;background:var(--acc);padding:5px 10px;border-radius:6px;font-weight:600">Complete</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border:1px solid var(--acc);padding:4px 10px;border-radius:6px;font-weight:600">MQTT → TimescaleDB</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">2026 · Backend / IoT · Python</span>
+            </div>
+            <h3 style="margin:0;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-0.02em">Heatbeat</h3>
+            <p style="margin:14px 0 18px;font-size:clamp(14px,1.8vw,17px);line-height:1.6;color:var(--tx2)">Vendor-neutral monitoring for heating plants: gas boilers, heat pumps and district heating. Readings flow <span style="color:var(--tx)">MQTT → Python bridge → TimescaleDB</span> with no loss and no duplicates, even when the bridge, the database or the broker goes down.</p>
+            <p style="margin:0 0 24px;font-size:clamp(13px,1.5vw,15px);line-height:1.6;color:var(--tx3)">Alarm rules with notifications, remote parameter changes with four-eyes approval and an audit trail, an optimiser with a weather-normalised savings estimate, and a Vue portal. Simulated plants; 260 Python tests, a chaos test and 10 architecture decision records.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px">{{ chipsHeatbeat }}</div>
+            <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--acc)">Read case study →</span>
+          </div>
+          <!-- visual: pipeline status (hidden on tablet/mobile) -->
+          <div class="feat-visual" style="border-left:1px solid var(--line);background:var(--bg3);padding:28px 28px;display:flex;flex-direction:column;justify-content:center">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:14px">Pipeline</div>
+            {{ heatbeatFlow }}
+          </div>
+        </a>
 
         <!-- Speicherlotse (MQTT + Kafka) -->
         <a data-reveal onClick="{{ goSpeicher }}" class="feat-card" style="cursor:pointer;margin-bottom:22px;border:1px solid var(--line2);border-radius:18px;background:var(--bg2);transition:border-color .3s,transform .3s" style-hover="border-color:var(--acc);transform:translateY(-3px)">
@@ -505,7 +526,26 @@
     <div class="wrap">
       <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:16px">// Work — index</div>
       <h1 style="margin:0;font-size:clamp(36px,6vw,76px);font-weight:600;letter-spacing:-0.03em">Selected projects<span style="color:var(--acc)">.</span></h1>
-      <p style="margin:22px 0 64px;max-width:600px;font-size:clamp(15px,1.8vw,18px);color:var(--tx2)">Production work shipped for real clients and platforms — from legal case management to public health dashboards — plus Speicherlotse, an end-to-end event-driven telemetry platform.</p>
+      <p style="margin:22px 0 64px;max-width:600px;font-size:clamp(15px,1.8vw,18px);color:var(--tx2)">Production work shipped for real clients and platforms — from legal case management to public health dashboards — plus two end-to-end telemetry platforms: Heatbeat for heating plants and Speicherlotse for home energy storage.</p>
+
+      <a onClick="{{ goHeatbeat }}" class="feat-card" style="cursor:pointer;border:1px solid var(--line2);border-radius:18px;background:var(--bg2);margin-bottom:22px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--acc);transform:translateY(-3px)">
+        <div style="padding:clamp(24px,4vw,42px) clamp(20px,3.5vw,40px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#06120a;background:var(--acc);padding:5px 10px;border-radius:6px;font-weight:600">Complete</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border:1px solid var(--acc);padding:4px 10px;border-radius:6px;font-weight:600">MQTT → TimescaleDB</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx3)">2026 · Python</span>
+          </div>
+          <h3 style="margin:0;font-size:clamp(24px,3vw,32px);font-weight:600;letter-spacing:-0.02em">Heatbeat</h3>
+          <p style="margin:14px 0 18px;font-size:clamp(14px,1.8vw,17px);line-height:1.6;color:var(--tx2)">Monitoring and optimisation for heating plants: <span style="color:var(--tx)">MQTT → Python bridge → TimescaleDB</span>, alarms, safe remote parameter changes, a savings estimate and a Vue portal. Zero loss and zero duplicates in the chaos test.</p>
+          <p style="margin:0 0 24px;font-size:clamp(13px,1.5vw,15px);line-height:1.6;color:var(--tx3)">Simulated plants, real engineering: tenant isolation in the database, 260 Python tests, 17 portal tests, measured throughput and query plans, CI on every push.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">{{ chipsHeatbeat }}</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--acc)">Read case study →</span>
+        </div>
+        <div class="feat-visual" style="border-left:1px solid var(--line);background:var(--bg3);padding:28px 28px;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:14px">Pipeline</div>
+          {{ heatbeatFlow }}
+        </div>
+      </a>
 
       <a onClick="{{ goSpeicher }}" class="feat-card" style="cursor:pointer;border:1px solid var(--line2);border-radius:18px;background:var(--bg2);margin-bottom:22px;transition:border-color .3s,transform .3s" style-hover="border-color:var(--acc);transform:translateY(-3px)">
         <div style="padding:clamp(24px,4vw,42px) clamp(20px,3.5vw,40px)">
@@ -751,6 +791,95 @@
   </main>
   </sc-if>
 
+  <!-- ════ HEATBEAT CASE STUDY ════ -->
+  <sc-if value="{{ isHeatbeat }}" hint-placeholder-val="{{ false }}">
+  <main data-screen-label="Project — Heatbeat" class="s-project">
+    <div class="wrap-sm">
+      <a class="lnk-u" onClick="{{ goWork }}" style="cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx2)">← Back to work</a>
+      <div style="display:flex;align-items:center;gap:12px;margin:30px 0 14px;flex-wrap:wrap">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Case study</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#06120a;background:var(--acc);padding:4px 10px;border-radius:6px;font-weight:600">Complete</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border:1px solid var(--acc);padding:3px 10px;border-radius:6px;font-weight:600">MQTT → TimescaleDB</span>
+      </div>
+      <h1 style="margin:0;font-size:clamp(40px,7vw,84px);font-weight:600;letter-spacing:-0.03em;line-height:1">Heatbeat</h1>
+      <p style="margin:22px 0 28px;max-width:680px;font-size:clamp(15px,2vw,20px);line-height:1.55;color:var(--tx2)">A vendor-neutral platform for <span style="color:var(--tx)">monitoring and optimising heating plants</span>. Gateways send readings over MQTT; a Python bridge stores them in <span style="color:var(--tx)">TimescaleDB</span> without losing or duplicating any; alarms, safe remote parameter changes, an optimiser and a Vue portal sit on top. The plants are simulated; every failure case has a test.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">{{ chipsHeatbeatAll }}</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+        <a href="https://github.com/MostafaQabbari/heatbeat" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line2);color:var(--tx);font-weight:500;font-size:15px;padding:12px 22px;border-radius:11px;transition:background .25s" style-hover="background:var(--bg2)">View on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="wrap-sm">
+      <!-- overview -->
+      <section style="padding:80px 0;border-bottom:1px solid var(--line)">
+        <div class="split-34">
+          <h2 style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Overview</h2>
+          <div>
+            <p style="margin:0 0 18px;font-size:clamp(15px,2vw,19px);line-height:1.7;color:var(--tx2)">A housing company may run hundreds of heating plants from many manufacturers. Faults go unnoticed, many plants heat more than they need to, and every fix means a technician on site. Heatbeat collects readings from every plant, <span style="color:var(--tx)">whatever the vendor</span>, raises alarms when something looks wrong, suggests better settings and lets an operator change a setting remotely, with safety checks.</p>
+            <p style="margin:0;font-size:clamp(15px,2vw,19px);line-height:1.7;color:var(--tx2)">I built it to learn this domain properly in <span style="color:var(--tx)">Python</span>: <span style="color:var(--tx)">MQTT</span> for device messages, <span style="color:var(--tx)">TimescaleDB</span> for time series, <span style="color:var(--tx)">FastAPI</span> for the API, <span style="color:var(--tx)">Celery</span> for scheduled jobs and <span style="color:var(--tx)">Vue</span> for the portal. Failure scenarios come from <span style="color:var(--tx)">Designing Data-Intensive Applications</span> and <span style="color:var(--tx)">System Design Interview</span>, and every architecture choice is written down as a decision record.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- pipeline -->
+      <section style="padding:80px 0;border-bottom:1px solid var(--line)">
+        <h2 style="margin:0 0 12px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Pipeline</h2>
+        <p style="margin:0 0 30px;max-width:620px;font-size:15px;line-height:1.6;color:var(--tx2)">A reading travels from the plant through the broker and the bridge into storage. Commands travel the same way back, with an expiry and a result the gateway reports.</p>
+        <div style="border:1px solid var(--line);border-radius:16px;background:var(--bg3);padding:28px 28px 24px;max-width:640px">{{ heatbeatFlow }}</div>
+      </section>
+
+      <!-- what it does -->
+      <section style="padding:80px 0;border-bottom:1px solid var(--line)">
+        <h2 style="margin:0 0 36px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// What it does</h2>
+        <div class="col-2-1px" style="background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden">{{ hbFeatureCells }}</div>
+      </section>
+
+      <!-- chaos test story -->
+      <section style="padding:80px 0;border-bottom:1px solid var(--line)">
+        <h2 style="margin:0 0 12px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// What the chaos test found</h2>
+        <p style="margin:0 0 36px;max-width:620px;font-size:15px;line-height:1.6;color:var(--tx2)">A script kills the bridge, stops the database and restarts the broker while data is flowing, then counts every reading. The first run failed, and the first explanation was wrong.</p>
+        <div style="display:flex;flex-direction:column;gap:0;align-items:center">{{ hbChaosFlow }}</div>
+        <p style="margin:34px auto 0;max-width:560px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:var(--tx3)">A reliability guarantee is only as strong as its weakest link. Here it was a configuration detail that no unit test could have caught.</p>
+      </section>
+
+      <!-- decisions -->
+      <section style="padding:80px 0;border-bottom:1px solid var(--line)">
+        <h2 style="margin:0 0 36px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Engineering decisions</h2>
+        <div style="border:1px solid var(--line);border-radius:16px;overflow:hidden">{{ hbDecisionRows }}</div>
+      </section>
+
+      <!-- measured -->
+      <section style="padding:80px 0;border-bottom:1px solid var(--line)">
+        <h2 style="margin:0 0 12px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Measured, not estimated</h2>
+        <p style="margin:0 0 36px;max-width:620px;font-size:15px;line-height:1.6;color:var(--tx2)">On one Linux VM with simulated data. Each one is documented in the repository together with how to reproduce it.</p>
+        <div style="border:1px solid var(--line);border-radius:16px;overflow:hidden">{{ hbMeasuredRows }}</div>
+      </section>
+
+      <!-- stack -->
+      <section style="padding:80px 0 120px">
+        <h2 style="margin:0 0 36px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)">// Tech stack</h2>
+        <div style="border:1px solid var(--line);border-radius:16px;overflow:hidden">{{ hbStackRows }}</div>
+        <p style="margin:30px 0 0;font-size:15px;color:var(--tx2)">Source, tests, failure scenarios and architecture decision records on <a class="lnk-u" href="https://github.com/MostafaQabbari/heatbeat" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">GitHub ↗</a></p>
+      </section>
+
+    </div>
+    <footer style="border-top:1px solid var(--line);background:var(--bg);padding:34px 0;margin-top:40px">
+  <div class="wrap footer-inner">
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--acc);letter-spacing:.08em;text-transform:uppercase">Mostafa Saad</div>
+      <div style="margin-top:8px;color:var(--tx2);font-size:14px">Backend &amp; Full-Stack Engineer ·  Germany</div>
+    </div>
+
+    <div style="display:flex;gap:18px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx2)">
+      <a class="lnk-u" href="mailto:mostafa.saad0996@gmail.com">Email</a>
+      <a class="lnk-u" href="https://github.com/MostafaQabbari" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      <a class="lnk-u" href="https://wa.me/4917651102270" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+    </div>
+  </div>
+</footer>
+  </main>
+  </sc-if>
+
   <!-- ════ 404 ════ -->
   <sc-if value="{{ is404 }}" hint-placeholder-val="{{ false }}">
   <main data-screen-label="404" style="min-height:100vh;display:grid;place-items:center;background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:30px 30px;padding:0 20px">
@@ -849,18 +978,35 @@ class Component extends DCLogic {
     return React.createElement('span',{key:text,style:{...base, color:'var(--tx2)'}}, text);
   }
 
+  /* pipeline status list used by the project cards: [stage, detail, built?] */
+  flowList(stages){
+    return React.createElement('div',{style:{display:'flex',flexDirection:'column'}},
+      stages.map(([name,detail,built],i)=>
+        React.createElement('div',{key:i,style:{display:'flex',alignItems:'flex-start',gap:'12px',padding:'10px 0',borderTop: i ? '1px solid var(--line)' : 'none'}},
+          React.createElement('span',{style:{flexShrink:0,marginTop:'5px',width:'10px',height:'10px',borderRadius:'50%',background: built ? 'var(--acc)' : 'transparent',border: built ? '1px solid var(--acc)' : '1px solid var(--tx3)'}}),
+          React.createElement('div',{style:{flex:1,minWidth:0}},
+            React.createElement('div',{style:{fontSize:'15px',fontWeight:600,color: built ? 'var(--tx)' : 'var(--tx2)'}}, name),
+            React.createElement('div',{style:{fontFamily:"'JetBrains Mono',monospace",fontSize:'11.5px',color:'var(--tx3)',marginTop:'2px',lineHeight:1.5}}, detail)
+          ),
+          React.createElement('span',{style:{flexShrink:0,fontFamily:"'JetBrains Mono',monospace",fontSize:'10.5px',letterSpacing:'.08em',textTransform:'uppercase',color: built ? 'var(--acc)' : 'var(--tx3)',marginTop:'3px'}}, built ? 'built' : 'next')
+        )
+      ),
+      React.createElement('div',{style:{marginTop:'14px',fontFamily:"'JetBrains Mono',monospace",fontSize:'11.5px',color:'var(--tx3)'}}, `all ${stages.length} stages built`)
+    );
+  }
+
   renderVals(){
     const atlas = ['Python','FastAPI','Java','Spring Boot','React','TypeScript','PostgreSQL','Docker','Claude AI'];
 
     /* [group title, chips, optional note, highlighted chips] */
     const skillData = [
       ['Languages', ['TypeScript', 'JavaScript', 'Python', 'Java']],
-      ['Messaging & Streaming', ['MQTT', 'Apache Kafka', 'Redpanda', 'Event-driven design'], 'Speicherlotse', ['MQTT', 'Apache Kafka']],
-      ['Back-end', ['Node.js', 'Nest.js', 'Express.js', 'FastAPI', 'Spring Boot', 'REST APIs']],
+      ['Messaging & Streaming', ['MQTT', 'Apache Kafka', 'Redpanda', 'Event-driven design'], 'Speicherlotse · Heatbeat', ['MQTT', 'Apache Kafka']],
+      ['Back-end', ['Node.js', 'Nest.js', 'Express.js', 'FastAPI', 'Spring Boot', 'Celery', 'REST APIs']],
       ['Front-end', ['React.js', 'Angular', 'Vue.js', 'HTML', 'CSS']],
       ['Databases', ['PostgreSQL', 'TimescaleDB', 'MongoDB']],
-      ['Cloud & DevOps', ['Docker', 'GitHub Actions', 'AWS', 'Google Cloud Platform']],
-      ['Quality & Tools', ['Property-based testing', 'node:test', 'pnpm workspaces', 'Git', 'CI/CD', 'Agile / Scrum']],
+      ['Cloud & DevOps', ['Docker', 'GitHub Actions', 'Prometheus', 'Grafana', 'AWS', 'Google Cloud Platform']],
+      ['Quality & Tools', ['Property-based testing', 'pytest', 'Hypothesis', 'Playwright', 'node:test', 'pnpm workspaces', 'Git', 'CI/CD', 'Agile / Scrum']],
     ];
     const courses = ['Web Development','Agile / SDLC','OOP','Data Structures','Algorithms','Operating Systems','Databases','Computer Networks','Net-Centric Computing'];
 
@@ -1007,6 +1153,83 @@ class Component extends DCLogic {
       ));
       if(conn) spAlarmFlow.push(React.createElement('div',{key:'c'+i,style:{padding:'12px 0',textAlign:'center',fontFamily:"'JetBrains Mono',monospace",fontSize:'11.5px',color:'var(--acc)'}},'↓ '+conn));
     });
+
+    /* ── Heatbeat case study — keep in sync with the repo (README, docs/measurements.md) ── */
+    const heatbeat = [
+      ['Plant simulator', 'gas boiler · heat pump · district heating, seeded faults', true],
+      ['MQTT broker', 'Mosquitto, QoS 1, persistent sessions', true],
+      ['Python bridge', 'validate, batch, ack only after the commit', true],
+      ['TimescaleDB', 'hypertable, compression, hourly aggregate', true],
+      ['Alarms + outbox', 'five rule kinds, e-mail and webhook', true],
+      ['FastAPI /v1', 'JWT roles, row-level security per tenant', true],
+      ['Vue portal', 'map, trends, alarms, parameter changes', true],
+    ];
+    const heatbeatFlow = this.flowList(heatbeat);
+
+    const hbFeatures = [
+      ['Simulated plant fleet','Gas boilers, heat pumps and district heating with a simple building model, five injectable faults (short cycling, heating curve too high, stuck sensor, low spread, falling COP) and three vendor formats, including Modbus-style registers.'],
+      ['Lossless ingest','The bridge acknowledges a message to the broker only after the database commit. A unique key with ON CONFLICT DO NOTHING turns MQTT redeliveries into no-ops, and the broker\'s in-flight window gives backpressure for free.'],
+      ['Time-series storage','A TimescaleDB hypertable with daily chunks, compression after 7 days (about 16x smaller), 365-day retention and a real-time hourly continuous aggregate for long charts.'],
+      ['Tenant isolation in the database','Row-level security on every relational table and tenant-filtering security-barrier views for measurements, because TimescaleDB 2.17 refuses row-level security on compressed hypertables.'],
+      ['Alarm rules','Threshold, spread, rate, flatline and absence rules all become one signal for one state machine with delay and hysteresis. A fault-matrix test runs every plant type with every fault.'],
+      ['Notifications via outbox','The alarm and its notification are written in one transaction. E-mail and webhook delivery (plus a stub SMS channel) uses idempotency keys, exponential backoff with jitter and a dead-letter state.'],
+      ['Safe remote parameter changes','Version check against lost updates, four-eyes approval for big changes, an expiry, a second range check on the gateway, and an append-only audit trail enforced by a trigger.'],
+      ['Optimiser and savings','Heating-curve and season advice from weather forecasts, and a degree-day savings estimate with a 95 % range, tested on simulated data with a known effect.'],
+      ['Versioned REST API','FastAPI /v1 with JWT roles (viewer, operator, admin), a rate limit per tenant, problem+json errors and cursor pagination. The portal\'s TypeScript types are generated from the OpenAPI file.'],
+      ['Vue portal','Portfolio map, trend charts, alarms, parameter forms and recommendations. Browser tests with Playwright, including automatic accessibility checks with axe.'],
+      ['Observability','Prometheus metrics, JSON logs with request ids, 10 alert rules each with a runbook, a Grafana dashboard and a gateway clock-drift check.'],
+      ['Chaos test','Kills the bridge, stops the database and restarts the broker under load, then counts every reading: 0 lost, 0 duplicated.'],
+    ];
+    const hbFeatureCells = hbFeatures.map(([t,d],i)=>
+      React.createElement('div',{key:i,style:{background:'var(--bg2)',padding:'26px'}},
+        React.createElement('h4',{style:{margin:'0 0 9px',fontSize:'18px',fontWeight:600}},t),
+        React.createElement('p',{style:{margin:0,fontSize:'15px',lineHeight:1.6,color:'var(--tx2)'}},d)
+      )
+    );
+
+    const hbChaos = [
+      ['First run','broker restart: 145 of 200 readings lost','first suspicion: the gateways'],
+      ['Store-and-forward','gateways keep every message until the broker confirms it','loss stayed; a lock-order deadlock appeared and was fixed'],
+      ['Real cause','the test broker could not write its session file','it forgot the bridge\'s subscription after the restart'],
+      ['Result','0 lost · 0 duplicated in all three scenarios',null],
+    ];
+    const hbChaosFlow = [];
+    hbChaos.forEach(([name,meta,conn],i)=>{
+      const tone = i===hbChaos.length-1 ? 'var(--acc)' : 'var(--line2)';
+      hbChaosFlow.push(React.createElement('div',{key:'n'+i,style:{width:'min(100%,520px)',background:'var(--bg2)',border:'1px solid '+tone,borderRadius:'13px',padding:'18px 22px',textAlign:'center'}},
+        React.createElement('div',{style:{fontSize:'17px',fontWeight:600}},name),
+        React.createElement('div',{style:{fontFamily:"'JetBrains Mono',monospace",fontSize:'12px',color:'var(--tx3)',marginTop:'5px'}},meta)
+      ));
+      if(conn) hbChaosFlow.push(React.createElement('div',{key:'c'+i,style:{padding:'12px 0',textAlign:'center',fontFamily:"'JetBrains Mono',monospace",fontSize:'11.5px',color:'var(--acc)'}},'↓ '+conn));
+    });
+
+    const hbDecisions = [
+      ['Ack after commit','A message is confirmed to the broker only once it is safely stored. A crash means redelivery, never loss, and idempotent writes make redelivery harmless.'],
+      ['No Kafka, yet','One bridge was measured at about 26,000 rows/s, several times the design target. MQTT shared subscriptions are the next step; Kafka would add a cluster to run for capacity that is not needed.'],
+      ['One row per value','A narrow measurement table: a new sensor type is a row in a catalogue, not a schema change, and the unique key doubles as the main query index.'],
+      ['Isolation in the database','A forgotten WHERE clause cannot leak another customer\'s data: the database itself filters by tenant, and a test proves the check would catch a missing policy.'],
+      ['Celery instead of Airflow','Every job is a plain idempotent function; Celery beat schedules it. Airflow would add a scheduler, a webserver and a metadata database for a handful of jobs.'],
+      ['Honest numbers','Simulated data is labelled as simulated, savings come with a 95 % range, and every claim points to a test, a measurement or a file.'],
+    ];
+    const hbMeasured = [
+      ['Ingest','about 26,000–29,000 rows/s with one bridge, for a backlog of 50 plants'],
+      ['Storage','about 112 bytes per row uncompressed, about 7 compressed (about 16x)'],
+      ['Failures','bridge crash, database outage and broker restart under load: 0 lost, 0 duplicated'],
+      ['API latency','on 2 million rows: latest values 60–90 ms, 7-day hourly series about 40 ms'],
+      ['Tests','211 unit + 49 integration tests in Python, 10 unit + 7 browser tests in the portal'],
+    ];
+    const hbStack = [
+      ['Language','Python 3.13 · TypeScript (portal)'],
+      ['Ingest','paho-mqtt (MQTT 5) · Mosquitto · Pydantic v2'],
+      ['Data','PostgreSQL + TimescaleDB 2.17 · psycopg 3 · Alembic'],
+      ['API & jobs','FastAPI · PyJWT · Celery + Redis'],
+      ['Frontend','Vue 3 · Pinia · ECharts · Leaflet · openapi-fetch'],
+      ['Quality','pytest · Hypothesis · mypy (strict) · ruff · Vitest · Playwright + axe'],
+      ['Ops','Docker Compose · Prometheus · Grafana · GitHub Actions · gitleaks · pip-audit'],
+    ];
+    const hbDecisionRows = proseRows(hbDecisions);
+    const hbMeasuredRows = proseRows(hbMeasured);
+    const hbStackRows = proseRows(hbStack);
     const spDecisionRows = proseRows(spDecisions);
     const spScaleRows = proseRows(spScale);
     const spStackRows = proseRows(spStack);
@@ -1016,7 +1239,7 @@ class Component extends DCLogic {
 
 
     /* ticker: messaging first, because that's what recruiters are scanning for */
-    const ticker = ['MQTT','Kafka','Node.js','TypeScript','NestJS','PostgreSQL','TimescaleDB','Docker','React','MongoDB','Express','REST API','CI/CD','Angular','AWS'].map((t,i)=>
+    const ticker = ['MQTT','Kafka','Python','FastAPI','Node.js','TypeScript','NestJS','PostgreSQL','TimescaleDB','Docker','React','MongoDB','Express','REST API','CI/CD','Angular','AWS'].map((t,i)=>
       React.createElement('span',{key:i,style:{display:'inline-flex',alignItems:'center',gap:'34px'}}, t, React.createElement('span',{style:{color:'var(--acc)'}},'/'))
     );
 
@@ -1027,6 +1250,7 @@ class Component extends DCLogic {
       isWork: this.state.page==='work',
       isProject: this.state.page==='project',
       isSpeicher: this.state.page==='speicher',
+      isHeatbeat: this.state.page==='heatbeat',
       is404: this.state.page==='404',
       themeLabel: this.state.theme==='dark' ? 'Light' : 'Dark',
       toggleTheme: ()=> this.setState(s=>({theme: s.theme==='dark'?'light':'dark', menuOpen:false})),
@@ -1038,6 +1262,7 @@ class Component extends DCLogic {
       goWork: ()=> this.setState({page:'work', menuOpen:false, contactOpen:false}),
       goProject: ()=> this.setState({page:'project', menuOpen:false, contactOpen:false}),
       goSpeicher: ()=> this.setState({page:'speicher', menuOpen:false, contactOpen:false}),
+      goHeatbeat: ()=> this.setState({page:'heatbeat', menuOpen:false, contactOpen:false}),
       goAbout: ()=> this.goSection('about'),
       goSkills: ()=> this.goSection('skills'),
       goContact: ()=> this.goSection('contact'),
@@ -1045,12 +1270,15 @@ class Component extends DCLogic {
       atlasChips: atlas.slice(0,6).map(s=>this.chip(s,false)),
       atlasChipsAll: atlas.map(s=>this.chip(s, s==='Claude AI')),
       chipsSpeicher: ['MQTT','Kafka','TypeScript','Node.js','NestJS','TimescaleDB','Docker'].map(s=>this.chip(s, s==='MQTT' || s==='Kafka')),
+      chipsHeatbeat: ['Python','MQTT','FastAPI','TimescaleDB','Celery','Vue','Docker'].map(s=>this.chip(s, s==='MQTT' || s==='TimescaleDB')),
+      chipsHeatbeatAll: ['Python','MQTT','Mosquitto','TimescaleDB','PostgreSQL','FastAPI','Celery','Redis','Vue','TypeScript','Prometheus','Docker'].map(s=>this.chip(s, s==='MQTT' || s==='TimescaleDB')),
       chipsLegal: ['Node.js','Express','JWT','PDF Gen','Nodemailer'].map(s=>this.chip(s,false)),
       chipsCancer: ['JavaScript','D3.js','REST API','HTML/CSS'].map(s=>this.chip(s,false)),
       chipsJada: ['React','Node.js','MongoDB','REST API'].map(s=>this.chip(s,false)),
       chipsMERN: ['MongoDB','Express','React','Node.js'].map(s=>this.chip(s,false)),
       skillGroups, courseChips: courses.map(s=>this.chip(s,false)),
       speicherFlow, spFeatureCells, spAlarmFlow, spDecisionRows, spScaleRows, spStackRows,
+      heatbeatFlow, hbFeatureCells, hbChaosFlow, hbDecisionRows, hbMeasuredRows, hbStackRows,
       featureCells, archFlow, stackRows, atlasGallery,
       tickerA: ticker,
     };
